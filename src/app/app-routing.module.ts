@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 // project import
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
+import { AuthGuard } from './demo/guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -13,16 +14,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/analytics',
+        redirectTo: '/auth/signin',
         pathMatch: 'full'
       },
       {
         path: 'home',
-        loadComponent: () => import('./demo/home/home.component').then(m => m.HomeComponent)
+        loadComponent: () => import('./demo/home/home.component').then(m => m.HomeComponent),
+        canActivate: [AuthGuard]
       },
       {
         path: 'announcement',
-        loadComponent: () => import('./demo/announcement/announcement.component').then(m => m.AnnouncementComponent)
+        loadComponent: () => import('./demo/announcement/announcement.component').then(m => m.AnnouncementComponent),
+        canActivate: [AuthGuard]
       },
       // {
       //   path: 'analytics',

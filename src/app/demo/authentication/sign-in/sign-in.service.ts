@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { Observable, from, of } from 'rxjs';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class SignInService {
 
   constructor(
     private auth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
   ) { }
 
   signin(params: SignIn): Observable<any>{

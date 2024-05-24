@@ -2,7 +2,7 @@ import { SignInService } from './sign-in.service';
 // angular import
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -19,7 +19,8 @@ export default class SignInComponent implements OnInit{
   loginForm!: FormGroup
 
   constructor(
-    private signInService: SignInService
+    private signInService: SignInService,
+    private router: Router
   ) {
 
   }
@@ -43,6 +44,7 @@ export default class SignInComponent implements OnInit{
       password: this.password.value
     }).subscribe((res) => {
       sessionStorage.setItem("token", res.user._delegate.accessToken)
+      this.router.navigate(['/home']);
     }, (err: any) => {
       sessionStorage.clear()
       console.log(err);
