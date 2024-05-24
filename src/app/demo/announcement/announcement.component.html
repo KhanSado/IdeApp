@@ -1,0 +1,28 @@
+<form [formGroup]="announcementForm" #formDir = "ngForm">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email Comercial</label>
+      <input type="email" class="form-control" formControlName="companyEmail" id="inputEmail4" placeholder="Email Comercial" />
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputCompanyName">Nome da Empresa</label>
+      <input type="text" class="form-control" formControlName="companyName" id="inputCompanyName" placeholder="Nome da sua empresa" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputPhone">Telefone Comercial</label>
+      <input type="number" class="form-control" formControlName="companyPhone" id="inputPhone" placeholder="Telefone Comercial" />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputArea">Área de Trabalho</label>
+      <select id="inputArea" class="form-control" formControlName="area">
+        <option selected>Selecione</option>
+        <option *ngFor="let area of professionAreas">{{ area }}</option>
+      </select>
+    </div>
+  </div>
+  <button (click)="registerAnnouncement()" class="btn btn-primary">Cadastrar</button>
+</form>
