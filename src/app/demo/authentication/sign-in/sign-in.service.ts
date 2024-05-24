@@ -12,6 +12,7 @@ export class SignInService {
   constructor(
     private auth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private router: Router
   ) { }
 
   signin(params: SignIn): Observable<any>{
@@ -32,6 +33,7 @@ export class SignInService {
 
   logout() {
     sessionStorage.removeItem('token');
+    this.router.navigate(['/auth/signin']);
   }
 
   createData(params:SignUp){

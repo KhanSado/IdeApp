@@ -4,6 +4,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 
 // bootstrap
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { SignInService } from 'src/app/demo/authentication/sign-in/sign-in.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-right',
@@ -24,18 +26,18 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 export class NavRightComponent {
   // public props
   visibleUserList: boolean;
-  chatMessage: boolean;
   friendId!: number;
 
   // constructor
-  constructor() {
+  constructor(
+    private signInService: SignInService,
+    private router: Router
+  ) {
     this.visibleUserList = false;
-    this.chatMessage = false;
   }
 
-  // public method
-  onChatToggle(friendID: number) {
-    this.friendId = friendID;
-    this.chatMessage = !this.chatMessage;
+
+  logout(){
+    this.signInService.logout()
   }
 }

@@ -1,6 +1,6 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -19,7 +19,8 @@ export default class SignUpComponent implements OnInit {
   signupForm!: FormGroup
 
   constructor(
-    private signInService: SignInService
+    private signInService: SignInService,
+    private router: Router
   ) {
 
   }
@@ -48,7 +49,8 @@ export default class SignUpComponent implements OnInit {
       email: this.email.value,
       password: this.password.value
     }).subscribe((res: any) => {
-      console.log(res);
+      sessionStorage.setItem("token", res.user._delegate.accessToken)
+      this.router.navigate(['/home']);
       this.signInService.createData({
         username: this.username.value,
         email: this.email.value,

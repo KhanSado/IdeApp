@@ -39,7 +39,8 @@ export default class SignInComponent implements OnInit{
     return this.loginForm.get('password')!
   }
 
-  login(){this.signInService.signin({
+  login(){
+    this.signInService.signin({
       email: this.email.value,
       password: this.password.value
     }).subscribe((res) => {
