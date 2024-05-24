@@ -64,6 +64,10 @@ const routes: Routes = [
       {
         path: 'auth/signin',
         loadComponent: () => import('./demo/authentication/sign-in/sign-in.component')
+      },
+      {
+        path: 'profissionais',
+        loadComponent: () => import('./demo/public-announcements/public-announcements.component').then(m => m.PublicAnnouncementsComponent)
       }
     ]
   }
