@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 // Angular Import
 import { Component } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -23,10 +24,11 @@ import { Router } from '@angular/router';
     ])
   ]
 })
-export class NavRightComponent {
+export class NavRightComponent implements OnInit{
   // public props
   visibleUserList: boolean;
   friendId!: number;
+  name: string | null = null;
 
   // constructor
   constructor(
@@ -35,9 +37,17 @@ export class NavRightComponent {
   ) {
     this.visibleUserList = false;
   }
+  ngOnInit(): void {
+    this.getUser()
+  }
 
 
   logout(){
     this.signInService.logout()
+  }
+
+  getUser() {
+    this.signInService.findData()
+    this.name = this.signInService.nome
   }
 }

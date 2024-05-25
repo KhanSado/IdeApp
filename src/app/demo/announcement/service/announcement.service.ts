@@ -21,7 +21,8 @@ export class AnnouncementService implements OnInit {
   }
 
   findData(){
-    this.firestore.doc('users/123').get().subscribe((doc) => {
+    console.log('find data');
+    this.firestore.doc('/users/N3ydOWPKZiEB4FH4NxbP').get().subscribe((doc) => {
       if (doc.exists) {
         console.log('Documento encontrado:', doc.data());
       } else {

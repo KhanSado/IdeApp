@@ -6,15 +6,11 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <div class="page-header-title">
-                @for (breadcrumb of navigationList; track breadcrumb; let last = $last) {
-                  @if (last) {
-                    <h5 class="m-b-10">{{ breadcrumb.title }}</h5>
-                  }
-                }
+
               </div>
               <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a [routerLink]="['/dashboard/analytics/']" title="Home"><i class="feather icon-home"></i></a>
+                  <a [routerLink]="['/home']" title="Home"><i class="feather icon-home"></i></a>
                 </li>
                 @for (breadcrumb of navigationList; track breadcrumb) {
                   @if (breadcrumb.url !== false) {

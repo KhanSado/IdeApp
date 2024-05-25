@@ -22,6 +22,7 @@ export class AnnouncementComponent implements OnInit{
   constructor(private service: AnnouncementService) { }
 
   ngOnInit(): void {
+    this.getuser()
     this.getProfessionAreas();
     this.announcementForm = new FormGroup({
       companyName: new FormControl('', [Validators.required]),
@@ -29,7 +30,6 @@ export class AnnouncementComponent implements OnInit{
       companyPhone: new FormControl('', [Validators.required]),
       area: new FormControl('', [Validators.required])
     })
-    // this.service.createData()
   }
   get companyName() {
     return this.announcementForm.get('companyName')!
@@ -51,6 +51,10 @@ export class AnnouncementComponent implements OnInit{
       companyPhone: this.companyPhone.value,
       area: this.area.value
     })
+  }
+
+  getuser(){
+    this.service.findData()
   }
 
   getProfessionAreas(): void {
