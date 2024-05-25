@@ -15,7 +15,7 @@
       <label for="inputVisitCult">Culto Visitado</label>
       <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
         <option selected>Selecione</option>
-        <option *ngFor="let cult of cultList">{{ cult.data }} - {{ cult.tema }}</option>
+        <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
       </select>
     </div>
   </div>

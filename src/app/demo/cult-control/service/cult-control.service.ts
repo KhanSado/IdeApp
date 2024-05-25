@@ -52,7 +52,16 @@ export class CultControlService implements OnInit {
   this.firestore.collection('receptionTeam').add({
    name: params.name,
    lead: params.lead,
- });
+ }).then(receptionTeamRef => {
+  const receptionTeamId = receptionTeamRef.id;
+  this.firestore.doc(`receptionTeam/${receptionTeamId}`).update ({
+    id: receptionTeamId
+  })
+  console.log('Visitor created with ID:', receptionTeamId);
+})
+.catch(error => {
+  console.error('Error creating visitor:', error);
+});
 }
 
   async findData(): Promise<Cult[]> {
@@ -129,6 +138,7 @@ type Visitor = {
 }
 
 type ReceptionTeam = {
+  id: string;
   name: string;
   lead: string;
 }

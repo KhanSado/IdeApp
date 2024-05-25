@@ -23,7 +23,7 @@
       <label for="inputReceptionTeam">Equipe de Recepção</label>
       <select id="inputReceptionTeam" class="form-control" formControlName="receptionTeam">
         <option selected>Selecione</option>
-        <option *ngFor="let receptionTeam of receptionTeamList">{{ receptionTeam.name }}</option>
+        <option *ngFor="let receptionTeam of receptionTeamList" value="{{receptionTeam.id}}">{{ receptionTeam.name }}</option>
       </select>
     </div>
   </div>

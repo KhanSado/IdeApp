@@ -63,6 +63,7 @@ export class NewCultVisitComponent implements OnInit{
 
 
 type Cult = {
+  id: string;
   data: Date;
   tema: string;
   pregador: string;

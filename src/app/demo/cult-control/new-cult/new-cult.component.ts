@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AnnouncementService } from '../../announcement/service/announcement.service';
 import { CultControlService } from '../service/cult-control.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -79,6 +78,7 @@ export class NewCultComponent implements OnInit{
 }
 
 type ReceptionTeam = {
+  id: string;
   name: string;
   lead: string;
 }

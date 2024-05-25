@@ -33,6 +33,7 @@ export class ReceptionTeamComponent implements OnInit{
 
   registerReceptionTeam(){
     this.service.createReceptionTeam({
+      id: "",
       name: this.name.value,
       lead: this.lead.value
     })
