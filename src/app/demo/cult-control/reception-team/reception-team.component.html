@@ -1,1 +1,14 @@
-<p>reception-team works!</p>
+<form [formGroup]="newReceptionTeamForm" #formDir = "ngForm">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputName">Nome</label>
+      <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Equipe de Recepção" />
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="lead">Lider</label>
+      <input type="text" class="form-control" formControlName="lead" id="lead" placeholder="Lider" />
+    </div>
+  </div>
+  <button (click)="registerReceptionTeam()" class="btn btn-primary">Cadastrar</button>
+</form>

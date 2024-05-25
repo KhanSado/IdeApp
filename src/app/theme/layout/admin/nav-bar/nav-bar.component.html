@@ -3,9 +3,8 @@
   <a href="javascript:" class="header-mobile-collapse" id="mobile-collapse1" (click)="this.NavCollapsedMob.emit()"
     ><i class="feather icon-menu"></i
   ></a>
-  <a [routerLink]="['/dashboard/analytics']" class="b-brand">
-    <img id="main-logo" src="assets/images/logo.png" alt="logo-img" class="logo" />
-    <img src="assets/images/logo-icon.png" alt="logo-icon-img" class="logo-thumb" />
+  <a [routerLink]="['/home']" class="b-brand">
+    <img id="main-logo" src="assets/images/text1.png" alt="logo-img" class="logo"  style="height: 50px;"/>
   </a>
   <a class="mob-toggler" [ngClass]="{ on: this.menuClass }" href="javascript:" (click)="toggleMobOption()"
     ><i class="feather icon-more-vertical"></i

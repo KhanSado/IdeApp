@@ -16,6 +16,9 @@ export class CultControlService implements OnInit {
       data: params.data,
       tema: params.tema,
       pregador: params.pregador,
+      qtdAdultos: params.qtdAdultos,
+      qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
+      receptionTeam: params.reception
     });
   }
 
@@ -25,6 +28,13 @@ export class CultControlService implements OnInit {
      phone: params.phone,
    });
  }
+
+ createReceptionTeam(params: ReceptionTeam){
+  this.firestore.collection('receptionTeam').add({
+   name: params.name,
+   lead: params.lead,
+ });
+}
 
   async findData(): Promise<Cult[]> {
     try {
@@ -52,12 +62,43 @@ export class CultControlService implements OnInit {
       throw error;
     }
   }
+
+  async findReceptionTeam(): Promise<ReceptionTeam[]> {
+    try {
+      const collectionRef = this.firestore.collection('receptionTeam');
+      const querySnapshot = await collectionRef.get().toPromise();
+
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return [];
+      }
+
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return [];
+      }
+
+      const documents: ReceptionTeam[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push(doc.data() as ReceptionTeam);
+      });
+
+      return documents;
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
+    }
+  }
 }
 
 type Cult = {
   data: Date;
   tema: string;
   pregador: string;
+  qtdAdultos: number;
+  qtdCriancasAdolescentes: number;
+  qtdVisitas: number,
+  reception: string
 }
 
 type Visitor = {
@@ -65,3 +106,7 @@ type Visitor = {
   phone: string;
 }
 
+type ReceptionTeam = {
+  name: string;
+  lead: string;
+}

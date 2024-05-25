@@ -3,11 +3,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CultControlService } from './service/cult-control.service';
 import { DocumentData } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
   selector: 'app-cult-control',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SharedModule, RouterModule],
   templateUrl: './cult-control.component.html',
   styleUrl: './cult-control.component.scss'
 })

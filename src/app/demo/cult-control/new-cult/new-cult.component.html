@@ -17,5 +17,27 @@
       <input type="text" class="form-control" formControlName="tema" id="tema" placeholder="Tema do Culto" />
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="inputReceptionTeam">Equipe de Recepção</label>
+      <select id="inputReceptionTeam" class="form-control" formControlName="receptionTeam">
+        <option selected>Selecione</option>
+        <option *ngFor="let receptionTeam of receptionTeamList">{{ receptionTeam.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputQtdAdultos">Número de Adultos Presentes</label>
+      <input type="number" class="form-control" formControlName="qtdAdultos" id="inputQtdAdultos" placeholder="Quantidade de Adultos" />
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputQtdCriancasAdolescentes">Número de Crianças e Adolescentes Presentes</label>
+      <input type="number" class="form-control" formControlName="qtdCriancasAdolescentes" id="inputQtdCriancasAdolescentes" placeholder="Número de Crianças e Adolescentes" />
+    </div>
+  </div>
   <button (click)="registerCult()" class="btn btn-primary">Cadastrar</button>
 </form>
