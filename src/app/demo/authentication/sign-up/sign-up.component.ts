@@ -45,6 +45,7 @@ export default class SignUpComponent implements OnInit {
 
   registerUser(){
     this.signInService.signup({
+      id: "",
       name: "",
       email: this.email.value,
       password: this.password.value,
@@ -53,11 +54,13 @@ export default class SignUpComponent implements OnInit {
       sessionStorage.setItem("token", res.user._delegate.accessToken)
       this.router.navigate(['/home']);
       this.signInService.createData({
+        id: "",
         name: this.username.value,
         email: this.email.value,
         password: "",
         userId: res.user._delegate.uid
       })
+
     }, (err: any) => {
         console.log(err);
     })

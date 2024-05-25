@@ -51,7 +51,16 @@ export class SignInService {
      name: params.name,
      email: params.email,
      userId: params.userId
-   });
+   }).then(userRef => {
+    const userId = userRef.id;
+    this.firestore.doc(`users/${userId}`).update ({
+      id: userId
+    })
+    console.log('User created with ID:', userId);
+  })
+  .catch(error => {
+    console.error('Error creating visitor:', error);
+  });
  }
 
  findData(): Promise<string | null> {
@@ -91,6 +100,7 @@ type SignIn = {
 }
 
 type SignUp = {
+  id: string;
   name: string;
   email: string;
   password: string;

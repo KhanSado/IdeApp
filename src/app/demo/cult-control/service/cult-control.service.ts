@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,9 @@ export class CultControlService implements OnInit {
     this.firestore.doc(`visitor/${visitorId}`).update ({
       id: visitorId
     })
+    this.firestore.doc(`cult/${params.visitedCult}`).update({
+      qtdVisitas: firebase.firestore.FieldValue.increment(1)
+    });
     console.log('Visitor created with ID:', visitorId);
   })
   .catch(error => {
