@@ -19,14 +19,33 @@ export class CultControlService implements OnInit {
       qtdAdultos: params.qtdAdultos,
       qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
       receptionTeam: params.reception
-    });
+    }).then(cultRef => {
+      const cultId = cultRef.id;
+      this.firestore.doc(`cult/${cultId}`).update ({
+        id: cultId
+      })
+      console.log('Visitor created with ID:', cultId);
+    })
+    .catch(error => {
+      console.error('Error creating visitor:', error);
+    });;
   }
 
   createVisitor(params: Visitor){
     this.firestore.collection('visitor').add({
      name: params.name,
      phone: params.phone,
-   });
+     visitedCult: params.visitedCult
+   }).then(visitorRef => {
+    const visitorId = visitorRef.id;
+    this.firestore.doc(`visitor/${visitorId}`).update ({
+      id: visitorId
+    })
+    console.log('Visitor created with ID:', visitorId);
+  })
+  .catch(error => {
+    console.error('Error creating visitor:', error);
+  });
  }
 
  createReceptionTeam(params: ReceptionTeam){
@@ -92,6 +111,7 @@ export class CultControlService implements OnInit {
 }
 
 type Cult = {
+  id: string;
   data: Date;
   tema: string;
   pregador: string;
@@ -102,8 +122,10 @@ type Cult = {
 }
 
 type Visitor = {
+  id: string;
   name: string;
   phone: string;
+  visitedCult: string
 }
 
 type ReceptionTeam = {

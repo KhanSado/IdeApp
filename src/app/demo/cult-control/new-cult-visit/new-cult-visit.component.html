@@ -10,5 +10,14 @@
       <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Telefone" />
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="inputVisitCult">Culto Visitado</label>
+      <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
+        <option selected>Selecione</option>
+        <option *ngFor="let cult of cultList">{{ cult.data }} - {{ cult.tema }}</option>
+      </select>
+    </div>
+  </div>
   <button (click)="registerVisitor()" class="btn btn-primary">Cadastrar</button>
 </form>

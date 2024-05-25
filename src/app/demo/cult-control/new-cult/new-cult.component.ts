@@ -66,6 +66,7 @@ export class NewCultComponent implements OnInit{
 
   registerCult(){
     this.service.createData({
+      id: "",
       data: this.data.value,
       pregador: this.pregador.value,
       tema: this.tema.value,
