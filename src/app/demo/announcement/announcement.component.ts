@@ -22,7 +22,7 @@ export class AnnouncementComponent implements OnInit{
   constructor(private service: AnnouncementService) { }
 
   ngOnInit(): void {
-    this.getuser()
+    // this.getuser()
     this.getProfessionAreas();
     this.announcementForm = new FormGroup({
       companyName: new FormControl('', [Validators.required]),
@@ -54,7 +54,7 @@ export class AnnouncementComponent implements OnInit{
   }
 
   getuser(){
-    this.service.findData()
+    // this.service.findData()
   }
 
   getProfessionAreas(): void {

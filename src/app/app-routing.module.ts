@@ -27,30 +27,26 @@ const routes: Routes = [
         loadComponent: () => import('./demo/announcement/announcement.component').then(m => m.AnnouncementComponent),
         canActivate: [AuthGuard]
       },
-      // {
-      //   path: 'analytics',
-      //   loadComponent: () => import('./demo/dashboard/dash-analytics.component')
-      // },
-      // {
-      //   path: 'component',
-      //   loadChildren: () => import('./demo/ui-element/ui-basic.module').then((m) => m.UiBasicModule)
-      // },
-      // {
-      //   path: 'chart',
-      //   loadComponent: () => import('./demo/chart & map/core-apex.component')
-      // },
       {
-        path: 'forms',
-        loadComponent: () => import('./demo/forms & tables/form-elements/form-elements.component')
+        path: 'cult-control/dashboard',
+        loadComponent: () => import('./demo/cult-control/cult-control.component').then(m => m.CultControlComponent),
+        canActivate: [AuthGuard]
       },
-      // {
-      //   path: 'tables',
-      //   loadComponent: () => import('./demo/forms & tables/tbl-bootstrap/tbl-bootstrap.component')
-      // },
-      // {
-      //   path: 'sample-page',
-      //   loadComponent: () => import('./demo/sample-page/sample-page.component')
-      // }
+      {
+        path: 'cult-control/new',
+        loadComponent: () => import('./demo/cult-control/new-cult/new-cult.component').then(m => m.NewCultComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'cult-control/visitor',
+        loadComponent: () => import('./demo/cult-control/new-cult-visit/new-cult-visit.component').then(m => m.NewCultVisitComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'cult-control/reception-team',
+        loadComponent: () => import('./demo/cult-control/reception-team/reception-team.component').then(m => m.ReceptionTeamComponent),
+        canActivate: [AuthGuard]
+      }
     ]
   },
   {

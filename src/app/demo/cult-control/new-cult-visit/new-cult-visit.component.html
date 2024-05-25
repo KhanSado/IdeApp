@@ -1,0 +1,14 @@
+<form [formGroup]="newVisitorForm" #formDir = "ngForm">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputName">Nome</label>
+      <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Nome do Visitante" />
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="phone">Telefone</label>
+      <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Telefone" />
+    </div>
+  </div>
+  <button (click)="registerVisitor()" class="btn btn-primary">Cadastrar</button>
+</form>

@@ -20,26 +20,26 @@ export class AnnouncementService implements OnInit {
     });
   }
 
-  findData(){
-    console.log('find data');
-    this.firestore.doc('/users/N3ydOWPKZiEB4FH4NxbP').get().subscribe((doc) => {
-      if (doc.exists) {
-        console.log('Documento encontrado:', doc.data());
-      } else {
-        console.log('Documento não encontrado');
-      }
-    });
-  }
+  // findData(){
+  //   console.log('find data');
+  //   this.firestore.doc('/users/N3ydOWPKZiEB4FH4NxbP').get().subscribe((doc) => {
+  //     if (doc.exists) {
+  //       console.log('Documento encontrado:', doc.data());
+  //     } else {
+  //       console.log('Documento não encontrado');
+  //     }
+  //   });
+  // }
 
-  editData(){
-    this.firestore.doc('users/123').update({
-      email: 'janedoe@example.com'
-    });
-  }
+  // editData(){
+  //   this.firestore.doc('users/123').update({
+  //     email: 'janedoe@example.com'
+  //   });
+  // }
 
-  deleteData(){
-    this.firestore.doc('users/123').delete();
-  }
+  // deleteData(){
+  //   this.firestore.doc('users/123').delete();
+  // }
 }
 
 type Announcement = {
