@@ -14,81 +14,116 @@ export class CultControlService implements OnInit {
   }
 
   createData(params: Cult){
-     this.firestore.collection('cult').add({
-      data: params.data,
-      tema: params.tema,
-      pregador: params.pregador,
-      qtdAdultos: params.qtdAdultos,
-      qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
-      receptionTeam: params.reception
-    }).then(cultRef => {
-      const cultId = cultRef.id;
-      this.firestore.doc(`cult/${cultId}`).update ({
-        id: cultId
-      })
-      console.log('Visitor created with ID:', cultId);
-    })
-    .catch(error => {
-      console.error('Error creating visitor:', error);
-    });;
+    if((params.data.toString().length > 0)
+      && (params.pregador.length > 0)
+      && (params.qtdAdultos.toString().length > 0)
+      && (params.qtdCriancasAdolescentes.toString().length > 0 )
+      && (params.reception.length > 0)
+      && (params.tema.length > 0)){
+        this.firestore.collection('cult').add({
+          data: params.data,
+          tema: params.tema,
+          pregador: params.pregador,
+          qtdAdultos: params.qtdAdultos,
+          qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
+          receptionTeam: params.reception
+        }).then(cultRef => {
+          const cultId = cultRef.id;
+          this.firestore.doc(`cult/${cultId}`).update ({
+            id: cultId
+          })
+          console.log('Visitor created with ID:', cultId);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Novo culto adicionado",
+            showConfirmButton: true,
+            confirmButtonText: "Ok",
+            timer: 1500
+          });
+        })
+        .catch(error => {
+          console.error('Error creating visitor:', error);
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocorreu um erro ao cadastrar o culto"
+      });
+    }
   }
 
   createVisitor(params: Visitor){
-    this.firestore.collection('visitor').add({
-     name: params.name,
-     phone: params.phone,
-     visitedCult: params.visitedCult
-   }).then(visitorRef => {
-    const visitorId = visitorRef.id;
-    this.firestore.doc(`visitor/${visitorId}`).update ({
-      id: visitorId
-    })
-    this.firestore.doc(`cult/${params.visitedCult}`).update({
-      qtdVisitas: firebase.firestore.FieldValue.increment(1)
-    });
-    console.log('Visitor created with ID:', visitorId);
+    if(params.name.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0){
+      this.firestore.collection('visitor').add({
+        name: params.name,
+        phone: params.phone,
+        visitedCult: params.visitedCult
+      }).then(visitorRef => {
+       const visitorId = visitorRef.id;
+       this.firestore.doc(`visitor/${visitorId}`).update ({
+         id: visitorId
+       })
+       this.firestore.doc(`cult/${params.visitedCult}`).update({
+         qtdVisitas: firebase.firestore.FieldValue.increment(1)
+       });
+       console.log('Visitor created with ID:', visitorId);
 
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Novo Visitante adicionado",
-      showConfirmButton: true,
-      confirmButtonText: "Ok",
-      timer: 1500
-    });
-  })
-  .catch(error => {
-    console.error('Error creating visitor:', error);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Ocorreu um erro ao cadastrar a visita"
-    });
-  });
+       Swal.fire({
+         position: "top-end",
+         icon: "success",
+         title: "Novo Visitante adicionado",
+         showConfirmButton: true,
+         confirmButtonText: "Ok",
+         timer: 1500
+       });
+     })
+     .catch(error => {
+       console.error('Error creating visitor:', error);
+     });
+    } else {
+       Swal.fire({
+         icon: "error",
+         title: "Oops...",
+         text: "Ocorreu um erro ao cadastrar novo visitante"
+       });
+    }
  }
 
  createReceptionTeam(params: ReceptionTeam){
-  this.firestore.collection('receptionTeam').add({
-   name: params.name,
-   lead: params.lead
- }).then(receptionTeamRef => {
-  const receptionTeamId = receptionTeamRef.id;
-  this.firestore.doc(`receptionTeam/${receptionTeamId}`).update ({
-    id: receptionTeamId
-  })
-  console.log('Reception Team created with ID:', receptionTeamId);
-  Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "Nova equipe de recepção adicionado",
-    showConfirmButton: true,
-    confirmButtonText: "Ok",
-    timer: 1500
-  });
-})
-.catch(error => {
-  console.error('Error creating visitor:', error);
-});
+  if (
+    params.name.length > 0,
+    params.lead.length > 0
+  ) {
+    this.firestore.collection('receptionTeam').add({
+      name: params.name,
+      lead: params.lead
+    }).then(receptionTeamRef => {
+     const receptionTeamId = receptionTeamRef.id;
+     this.firestore.doc(`receptionTeam/${receptionTeamId}`).update ({
+       id: receptionTeamId
+     })
+     console.log('Reception Team created with ID:', receptionTeamId);
+     Swal.fire({
+       position: "top-end",
+       icon: "success",
+       title: "Nova equipe de recepção adicionado",
+       showConfirmButton: true,
+       confirmButtonText: "Ok",
+       timer: 1500
+     });
+   })
+   .catch(error => {
+     console.error('Error creating visitor:', error);
+   });
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ocorreu um erro ao cadastrar nova equipe de recepção"
+    });
+  }
 }
 
   async findData(): Promise<Cult[]> {

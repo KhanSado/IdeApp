@@ -44,7 +44,6 @@ export class NewCultVisitComponent implements OnInit{
       phone: this.phone.value,
       visitedCult: this.visitedCult.value
     })
-
   }
 
   async findCult() {
