@@ -21,7 +21,7 @@ export class ReceptionTeamComponent implements OnInit{
   ngOnInit(): void {
     this.newReceptionTeamForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      lead: new FormControl('', [Validators.required]),
+      lead: new FormControl('', [Validators.required])
     })
   }
   get name() {

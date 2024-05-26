@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -46,22 +47,44 @@ export class CultControlService implements OnInit {
       qtdVisitas: firebase.firestore.FieldValue.increment(1)
     });
     console.log('Visitor created with ID:', visitorId);
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Novo Visitante adicionado",
+      showConfirmButton: true,
+      confirmButtonText: "Ok",
+      timer: 1500
+    });
   })
   .catch(error => {
     console.error('Error creating visitor:', error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ocorreu um erro ao cadastrar a visita"
+    });
   });
  }
 
  createReceptionTeam(params: ReceptionTeam){
   this.firestore.collection('receptionTeam').add({
    name: params.name,
-   lead: params.lead,
+   lead: params.lead
  }).then(receptionTeamRef => {
   const receptionTeamId = receptionTeamRef.id;
   this.firestore.doc(`receptionTeam/${receptionTeamId}`).update ({
     id: receptionTeamId
   })
-  console.log('Visitor created with ID:', receptionTeamId);
+  console.log('Reception Team created with ID:', receptionTeamId);
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Nova equipe de recepção adicionado",
+    showConfirmButton: true,
+    confirmButtonText: "Ok",
+    timer: 1500
+  });
 })
 .catch(error => {
   console.error('Error creating visitor:', error);
