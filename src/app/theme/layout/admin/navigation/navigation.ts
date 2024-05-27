@@ -52,6 +52,12 @@ export const NavigationItems: NavigationItem[] = [
             url: 'cult-control/dashboard'
           },
           {
+            id: 'visit-dashboard',
+            title: 'Visitas',
+            type: 'item',
+            url: 'cult-control/visitor-list'
+          },
+          {
             id: 'new-cult',
             title: 'Novo Culto',
             type: 'item',
@@ -73,5 +79,4 @@ export const NavigationItems: NavigationItem[] = [
   },
     ]
   },
-
 ];

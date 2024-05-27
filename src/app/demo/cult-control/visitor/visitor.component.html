@@ -1,0 +1,52 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Cultos" [options]="false" blockClass="table-border-style">
+
+
+        <!-- <form [formGroup]="searchVisitorForm" #formDir = "ngForm">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label for="inputVisitCult">Culto</label>
+                <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
+                </select>
+              </div>
+            </div>
+            <button (click)="searchVisitorsByCult()" class="btn btn-primary">Buscar</button>
+          </form> -->
+          <form [formGroup]="searchVisitorForm">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label for="inputVisitCult">Culto</label>
+                <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
+                </select>
+                <div *ngIf="visitedCult.invalid && visitedCult.touched" class="alert alert-danger">
+                  Selecione um culto!
+                </div> </div>
+            </div>
+            <button (click)="searchVisitorsByCult()" class="btn btn-primary">Buscar</button>
+          </form>
+
+
+
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+            <tr class="table-primary">
+              <th>Nome</th>
+              <th>Telefone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let visit of visitorList">
+              <td>{{ visit.name }}</td>
+              <td>{{ visit.phone }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  

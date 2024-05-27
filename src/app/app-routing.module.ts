@@ -46,6 +46,11 @@ const routes: Routes = [
         path: 'cult-control/reception-team',
         loadComponent: () => import('./demo/cult-control/reception-team/reception-team.component').then(m => m.ReceptionTeamComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'cult-control/visitor-list',
+        loadComponent: () => import('./demo/cult-control/visitor/visitor.component').then(m => m.VisitorComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },
