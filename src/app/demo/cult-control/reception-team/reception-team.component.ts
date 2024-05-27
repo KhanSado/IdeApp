@@ -36,7 +36,13 @@ export class ReceptionTeamComponent implements OnInit{
       id: "",
       name: this.name.value,
       lead: this.lead.value
-    })
+    }).then(() => {
+      // Limpar os campos após salvar
+      this.name.reset();
+      this.lead.reset();
+    }).catch((error) => {
+      console.error('Erro ao criar equipe de recepção: ', error);
+    });
   }
 }
 

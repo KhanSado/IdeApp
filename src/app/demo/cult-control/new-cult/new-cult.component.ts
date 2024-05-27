@@ -64,7 +64,7 @@ export class NewCultComponent implements OnInit{
   }
 
   registerCult(){
-    this.service.createData({
+    this.service.createCult({
       id: "",
       data: this.data.value,
       pregador: this.pregador.value,
@@ -73,7 +73,19 @@ export class NewCultComponent implements OnInit{
       qtdCriancasAdolescentes: this.qtdCriancasAdolescentes.value,
       qtdVisitas: 0,
       reception: this.receptionTeam.value
-    })
+    }).then(() => {
+      // Limpar os campos após salvar
+      this.data.reset();
+      this.pregador.reset();
+      this.tema.reset();
+      this.qtdAdultos.reset();
+      this.qtdCriancasAdolescentes.reset();
+      this.qtdAdultos.reset();
+      this.receptionTeam.reset();
+
+    }).catch((error) => {
+      console.error('Erro ao criar Culto: ', error);
+    });
   }
 }
 

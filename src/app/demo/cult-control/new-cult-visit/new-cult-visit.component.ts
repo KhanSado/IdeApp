@@ -43,7 +43,14 @@ export class NewCultVisitComponent implements OnInit{
       name: this.name.value,
       phone: this.phone.value,
       visitedCult: this.visitedCult.value
-    })
+    }).then(() => {
+      // Limpar os campos após salvar
+      this.name.reset();
+      this.phone.reset();
+      this.visitedCult.reset();
+    }).catch((error) => {
+      console.error('Erro ao criar visitante: ', error);
+    });
   }
 
   async findCult() {
