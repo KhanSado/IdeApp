@@ -1,5 +1,22 @@
-<div *ngFor="let cult of cults">
-  <h2>{{ cult.tema }}</h2>
-  <h4>{{ cult.pregador }}</h4>
-  <p>{{ cult.data }}</p>
+<div class="col-xl-12">
+  <app-card cardTitle="Cultos" [options]="false" blockClass="table-border-style">
+    <div class="table-responsive">
+      <table class="table table-styling">
+        <thead>
+          <tr class="table-primary">
+            <th>Tema</th>
+            <th>Data</th>
+            <th>Pregador</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cult of cults">
+            <td>{{ cult.tema }}</td>
+            <td>{{ cult.data }}</td>
+            <td>{{ cult.pregador }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </app-card>
 </div>
