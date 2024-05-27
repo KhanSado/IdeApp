@@ -1,23 +1,27 @@
-<form [formGroup]="newVisitorForm" #formDir = "ngForm">
-  <div class="row">
-    <div class="form-group col-md-6">
-      <label for="inputName">Nome</label>
-      <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Nome do Visitante" />
-    </div>
-
-    <div class="form-group col-md-6">
-      <label for="phone">Telefone</label>
-      <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Telefone" />
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-12">
-      <label for="inputVisitCult">Culto Visitado</label>
-      <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
-        <option selected>Selecione</option>
-        <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
-      </select>
-    </div>
-  </div>
-  <button (click)="registerVisitor()" class="btn btn-primary">Cadastrar</button>
-</form>
+<div class="col-xl-12">
+  <app-card cardTitle="Nova Visita" [options]="false" blockClass="table-border-style">
+    <form [formGroup]="newVisitorForm" #formDir = "ngForm">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="inputName">Nome</label>
+          <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Nome do Visitante" />
+        </div>
+    
+        <div class="form-group col-md-6">
+          <label for="phone">Telefone</label>
+          <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Telefone" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="inputVisitCult">Culto Visitado</label>
+          <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
+            <option selected>Selecione</option>
+            <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
+          </select>
+        </div>
+      </div>
+      <button (click)="registerVisitor()" class="btn btn-primary">Cadastrar</button>
+    </form>
+</app-card>
+</div>
