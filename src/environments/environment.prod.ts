@@ -10,12 +10,12 @@ export const environment = {
   appVersion: packageInfo.version,
   apiUrl: 'http://localhost:4200',
   firebase: {
-    apiKey: "AIzaSyAsAfCauTFF4tUgQg15qKDeOIFjY6RNg4s",
-    authDomain: "aletheya-40661.firebaseapp.com",
-    projectId: "aletheya-40661",
-    storageBucket: "aletheya-40661.appspot.com",
-    messagingSenderId: "149052266200",
-    appId: "1:149052266200:web:855c23fae8009427c3a9ad",
-    measurementId: "G-VX6SW10Z5M"
+    apiKey: "AIzaSyD2gBKhQcRTDeUE6ajzSko9S3uhyRVqfVE",
+    authDomain: "ide-app-ippn.firebaseapp.com",
+    projectId: "ide-app-ippn",
+    storageBucket: "ide-app-ippn.appspot.com",
+    messagingSenderId: "288479226452",
+    appId: "1:288479226452:web:451a46bbe135e874631bc1",
+    measurementId: "G-8F8BGWGBJ2"
   }
 };

@@ -1,7 +1,7 @@
 {
   "name": "gradient-able-free-angular-admin-template",
-  "version": "4.0.0",
-  "author": "CodedThemes",
+  "version": "1.0.0",
+  "author": "Guilherme Berson",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,7 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "@sweetalert2/ngx-sweetalert2": "^12.3.0",
-    "apexcharts": "^3.49.0",
+    "apexcharts": "^3.49.1",
     "bootstrap": "^5.3.3",
     "firebase": "^10.12.1",
     "firebase-tools": "^13.10.0",

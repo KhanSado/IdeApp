@@ -1,19 +1,5 @@
 <div class="col-xl-12">
-    <app-card cardTitle="Cultos" [options]="false" blockClass="table-border-style">
-
-
-        <!-- <form [formGroup]="searchVisitorForm" #formDir = "ngForm">
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label for="inputVisitCult">Culto</label>
-                <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
-                  <option selected>Selecione</option>
-                  <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
-                </select>
-              </div>
-            </div>
-            <button (click)="searchVisitorsByCult()" class="btn btn-primary">Buscar</button>
-          </form> -->
+    <app-card cardTitle="Visitas por Culto" [options]="false" blockClass="table-border-style">
           <form [formGroup]="searchVisitorForm">
             <div class="row">
               <div class="form-group col-md-12">

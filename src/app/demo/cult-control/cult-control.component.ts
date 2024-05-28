@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CultControlService } from './service/cult-control.service';
-import { DocumentData } from '@angular/fire/compat/firestore';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
@@ -17,8 +16,9 @@ export class CultControlComponent implements OnInit{
 
   newCultForm!: FormGroup
   cults: Cult[] = [];
+  cult: Cult | undefined;
 
-  constructor(private service: CultControlService) { }
+  constructor(private service: CultControlService, private router: Router) { }
 
   ngOnInit(): void {
     this.findCults()
@@ -36,10 +36,23 @@ export class CultControlComponent implements OnInit{
       console.error('Erro ao buscar documentos:', error);
     }
   }
+
+  async showDetails(id: string) {
+    try {
+      this.router.navigate(['/cult-control/cult-details/', id]);
+    } catch (error) {
+      console.error('Erro ao buscar documento:', error);
+    }    
+  }
 }
 
 type Cult = {
+  id: string;
   data: Date;
   tema: string;
   pregador: string;
+  qtdAdultos: number;
+  qtdCriancasAdolescentes: number;
+  qtdVisitas: number,
+  reception: string
 }

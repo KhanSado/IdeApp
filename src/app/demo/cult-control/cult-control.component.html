@@ -7,6 +7,7 @@
             <th>Tema</th>
             <th>Data</th>
             <th>Pregador</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +15,9 @@
             <td>{{ cult.tema }}</td>
             <td>{{ cult.data }}</td>
             <td>{{ cult.pregador }}</td>
+            <td>
+              <a (click)="showDetails(cult.id)"> Detalhes </a> 
+            </td>
           </tr>
         </tbody>
       </table>

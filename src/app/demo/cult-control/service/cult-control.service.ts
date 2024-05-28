@@ -247,6 +247,28 @@ createReceptionTeam(params: ReceptionTeam): Promise<void> {
   }
 
 
+  async findCultById(id: string): Promise<Cult | undefined> {
+    try {
+      const docRef = this.firestore.collection('cult').doc(id);
+      const docSnapshot = await docRef.get().toPromise();
+  
+      if (docSnapshot && docSnapshot.exists) {
+        console.log(docSnapshot.data() as Cult);
+        
+        return docSnapshot.data() as Cult;
+      } else {
+        console.log('Documento não encontrado');
+        return undefined;
+      }
+    } catch (error) {
+      console.error('Erro ao buscar documento:', error);
+      throw error;
+    }
+  }
+  
+  
+  
+
 }
 
 type Cult = {
