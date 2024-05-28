@@ -4,7 +4,7 @@
       <div class="row align-items-center text-center">
         <div class="col-md-12">
           <div class="card-body"[formGroup]="loginForm" #formDir = "ngForm">
-            <img src="assets/images/text1.png" alt="logo" class="img-fluid mb-4"  style="height: 175px;"/>
+            <img src="assets/images/logo-v2.png" alt="logo" class="img-fluid mb-4"  style="height: 175px;"/>
             <p class="mb-3 f-w-400">IDE - Interface de Desenvolvimento Eclesiástico</p>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"><i class="feather icon-mail"></i></span>
@@ -23,7 +23,7 @@
             <div class="d-grid">
               <button class="btn btn-block btn-primary mb-4" (click)="login()">Entrar</button>
             </div>
-            <p class="mb-2 text-muted">Esqueceu sua senha? <a href="javascriprt:" class="f-w-400">Recuperar</a></p>
+            <!-- <p class="mb-2 text-muted">Esqueceu sua senha? <a href="javascriprt:" class="f-w-400">Recuperar</a></p> -->
             <p class="mb-0 text-muted">Não tem conta? <a [routerLink]="['/auth/signup']" class="f-w-400">Cadastrar</a></p>
           </div>
         </div>
