@@ -13,6 +13,7 @@ type Cult = {
 type Visitor = {
   id: string;
   name: string;
+  recievVisit: String;
   phone: string;
   visitedCult: string
 }
@@ -66,19 +67,16 @@ export class VisitorComponent implements OnInit {
   async searchVisitorsByCult() {
     if (this.visitedCult.invalid) {
       console.error('Culto precisa ser selecionado');
-      return; // Prevent search if cult is not selected
+      return; 
     }
 
-    const cultId = this.visitedCult.value; // Get the selected cult ID
+    const cultId = this.visitedCult.value;
 
     try {
       const documents = await this.service.findVisitorByCult(cultId);
       if (documents && documents.length > 0) {
         this.visitorList = []; 
-        this.visitorList = documents
-  
-        console.log("DOCUMENTOS   " + this.visitorList); // Log 
-        
+        this.visitorList = documents        
       } else {
         this.visitorList = []; 
         console.log('Nenhum documento encontrado');

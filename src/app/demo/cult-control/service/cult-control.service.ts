@@ -70,6 +70,7 @@ createVisitor(params: Visitor): Promise<void> {
       this.firestore.collection('visitor').add({
         name: params.name,
         phone: params.phone,
+        recievVisit: params.recievVisit,
         visitedCult: params.visitedCult
       }).then(visitorRef => {
         const visitorId = visitorRef.id;
@@ -286,6 +287,7 @@ type Visitor = {
   id: string;
   name: string;
   phone: string;
+  recievVisit: String;
   visitedCult: string
 }
 

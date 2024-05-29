@@ -1,18 +1,17 @@
 <div class="col-xl-12">
-    <app-card cardTitle="Visitas por Culto" [options]="false" blockClass="table-border-style">
+    <app-card cardTitle="Selecione o culto para ver as visitas" [options]="false" blockClass="table-border-style">
           <form [formGroup]="searchVisitorForm">
             <div class="row">
-              <div class="form-group col-md-12">
-                <label for="inputVisitCult">Culto</label>
+              <div class="form-group col-md-10">
                 <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
                   <option selected>Selecione</option>
                   <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
                 </select>
-                <div *ngIf="visitedCult.invalid && visitedCult.touched" class="alert alert-danger">
-                  Selecione um culto!
-                </div> </div>
+              </div>
+              <div class="form-group col-md-2">
+                <button (click)="searchVisitorsByCult()" class="btn btn-primary">Buscar</button>
+              </div>
             </div>
-            <button (click)="searchVisitorsByCult()" class="btn btn-primary">Buscar</button>
           </form>
 
 
@@ -22,12 +21,14 @@
           <thead>
             <tr class="table-primary">
               <th>Nome</th>
+              <th>Deseja receber Visita ?</th>
               <th>Telefone</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let visit of visitorList">
               <td>{{ visit.name }}</td>
+              <td>{{ visit.recievVisit }}</td>
               <td>{{ visit.phone }}</td>
             </tr>
           </tbody>

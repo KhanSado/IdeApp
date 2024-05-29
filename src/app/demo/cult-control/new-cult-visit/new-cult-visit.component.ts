@@ -16,14 +16,17 @@ export class NewCultVisitComponent implements OnInit{
 
   newVisitorForm!: FormGroup
   cultList: Cult[] = [];
+  recievVisitOption: string[] = [];
 
   constructor(private service: CultControlService) { }
 
   ngOnInit(): void {
     this.findCult()
+    this.getRecievVisitOptions()
     this.newVisitorForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
+      recievVisit: new FormControl('', [Validators.required]),
       visitedCult: new FormControl('', [Validators.required])
     })
   }
@@ -36,12 +39,16 @@ export class NewCultVisitComponent implements OnInit{
   get visitedCult() {
     return this.newVisitorForm.get('visitedCult')!
   }
+  get recievVisit() {
+    return this.newVisitorForm.get('recievVisit')!
+  }
 
   registerVisitor(){
     this.service.createVisitor({
       id: "",
       name: this.name.value,
       phone: this.phone.value,
+      recievVisit: this.recievVisit.value,
       visitedCult: this.visitedCult.value
     }).then(() => {
       // Limpar os campos após salvar
@@ -64,6 +71,13 @@ export class NewCultVisitComponent implements OnInit{
     } catch (error) {
       console.error('Erro ao buscar documentos:', error);
     }
+  }
+
+  getRecievVisitOptions(): void {
+    this.recievVisitOption = [
+      'Sim',
+      'Não'
+  ];
   }
 }
 

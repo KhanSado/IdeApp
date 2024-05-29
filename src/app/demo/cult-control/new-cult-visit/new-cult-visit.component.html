@@ -14,6 +14,16 @@
       </div>
       <div class="row">
         <div class="form-group col-md-12">
+          <label for="inputRecievVisit">Deseja Receber Visita?</label>
+          <select id="inputRecievVisit" class="form-control" formControlName="recievVisit">
+            <option selected>Selecione</option>
+            <option *ngFor="let rvo of recievVisitOption">{{ rvo }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
           <label for="inputVisitCult">Culto Visitado</label>
           <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
             <option selected>Selecione</option>
@@ -21,6 +31,7 @@
           </select>
         </div>
       </div>
+
       <button (click)="registerVisitor()" class="btn btn-primary">Cadastrar</button>
     </form>
 </app-card>
