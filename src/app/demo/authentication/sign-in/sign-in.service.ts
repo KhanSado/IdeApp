@@ -7,10 +7,10 @@ import { Observable, from, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SignInService {
+export class SignInService{
 
   user$!: Observable<any>;
-  nome: string | null = null;
+  nome: string | undefined;
 
 
   constructor(
@@ -21,7 +21,8 @@ export class SignInService {
     this.user$ = this.auth.authState;
    }
 
-   getUserId(): Promise<string | null> {
+   // Mock implementation of getUserId. Replace with actual implementation.
+   private getUserId(): Promise<string | null> {
     return this.auth.currentUser.then(user => user ? user.uid : null);
   }
 
@@ -63,35 +64,30 @@ export class SignInService {
   });
  }
 
- findData(): Promise<string | null> {
-  return this.getUserId().then(uid => {
-    console.log(uid);
-
+ async findData(): Promise<string | null> {
+  try {
+    const uid = await this.getUserId();
     if (uid) {
-      return this.firestore.collection('users', ref => ref.where('userId', '==', uid)).get().toPromise().then(querySnapshot => {
-        if (querySnapshot && !querySnapshot.empty) {
-          querySnapshot.forEach(doc => {
-            const data = doc.data() as SignUp;
-            if (data) {
-              this.nome = data.name;
-            }
-          });
-          return this.nome;
-        } else {
-          console.log('Documento não encontrado');
-          return null;
-        }
-      });
+      const querySnapshot = await this.firestore.collection('users', ref => ref.where('userId', '==', uid)).get().toPromise();
+      if (querySnapshot && !querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const data = userDoc.data() as SignUp;
+        this.nome = data.name;
+        return this.nome;
+      } else {
+        console.log('Documento não encontrado');
+        return null;
+      }
     } else {
       console.log('Usuário não está logado');
       return null;
     }
-  }).catch(error => {
+  } catch (error) {
     console.error('Erro ao obter UID do usuário:', error);
     return null;
-  });
+  }
 }
-
+ 
 }
 
 type SignIn = {

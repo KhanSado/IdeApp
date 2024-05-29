@@ -7,6 +7,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SignInService } from 'src/app/demo/authentication/sign-in/sign-in.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-nav-right',
@@ -28,26 +30,65 @@ export class NavRightComponent implements OnInit{
   // public props
   visibleUserList: boolean;
   friendId!: number;
-  name: string | null = null;
+  name: string | undefined;
 
   // constructor
   constructor(
     private signInService: SignInService,
-    private router: Router
+    private router: Router,
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore
   ) {
     this.visibleUserList = false;
   }
   ngOnInit(): void {
-    this.getUser()
+    this.findData()
   }
 
+  // Mock implementation of getUserId. Replace with actual implementation.
+  private getUserId(): Promise<string | null> {
+    return this.auth.currentUser.then(user => user ? user.uid : null);
+  }
 
   logout(){
     this.signInService.logout()
   }
 
-  getUser() {
-    this.signInService.findData()
-    this.name = this.signInService.nome
+  // async getUser() {
+  //   await this.signInService.findData();
+  //   this.name = this.signInService.nome;
+  //   console.log('User name:', this.name);
+  // }
+
+  async findData(): Promise<string | null> {
+    try {
+      const uid = await this.getUserId();
+      if (uid) {
+        const querySnapshot = await this.firestore.collection('users', ref => ref.where('userId', '==', uid)).get().toPromise();
+        if (querySnapshot && !querySnapshot.empty) {
+          const userDoc = querySnapshot.docs[0];
+          const data = userDoc.data() as SignUp;
+          this.name = data.name;
+          return this.name;
+        } else {
+          console.log('Documento não encontrado');
+          return null;
+        }
+      } else {
+        console.log('Usuário não está logado');
+        return null;
+      }
+    } catch (error) {
+      console.error('Erro ao obter UID do usuário:', error);
+      return null;
+    }
   }
+}
+
+type SignUp = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  userId: string
 }

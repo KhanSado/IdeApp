@@ -16,13 +16,15 @@ export class CultDetailsComponent implements OnInit {
 
   id!: string;
   cult: Cult | undefined;
-  
+  cards: Card[] = [];
+
   constructor(private route: ActivatedRoute, private service: CultControlService) {
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
     console.log('ID:', this.id);
+    this.showDetails(this.id)
   }
 
   async showDetails(id: string) {
@@ -30,6 +32,40 @@ export class CultDetailsComponent implements OnInit {
       const cult = await this.service.findCultById(id);
       this.cult = cult;
       console.log(this.cult);
+     this.cards = [
+        {
+          background: 'bg-c-blue',
+          title: 'Adultos',
+          icon: 'icon-users',
+          text: '',
+          number: (this.cult?.qtdAdultos ?? 0),
+          no: ''
+        },
+        {
+          background: 'bg-c-green',
+          title: 'Crianças e Adolescentes',
+          icon: 'icon-users',
+          text: '',
+          number: (this.cult?.qtdCriancasAdolescentes ?? 0),
+          no: ''
+        },
+        {
+          background: 'bg-c-yellow',
+          title: 'Visitas',
+          icon: 'icon-users',
+          text: '',
+          number: (this.cult?.qtdVisitas ?? 0),
+          no: ''
+        },
+        {
+          background: 'bg-c-red',
+          title: 'Publico Total',
+          icon: 'icon-users',
+          text: '',
+          number: (this.cult?.qtdAdultos ?? 0) + (this.cult?.qtdCriancasAdolescentes ?? 0) + (this.cult?.qtdVisitas ?? 0),
+          no: ''
+        }
+      ];
     } catch (error) {
       console.error('Erro ao buscar documento:', error);
     }    
@@ -45,4 +81,13 @@ type Cult = {
   qtdCriancasAdolescentes: number;
   qtdVisitas: number,
   reception: string
+}
+
+interface Card {
+  background: string;
+  title: string;
+  icon: string;
+  text: string;
+  number: string | number | undefined;
+  no: string;
 }
