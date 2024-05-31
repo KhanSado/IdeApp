@@ -1,1 +1,14 @@
-<p>new-instrument works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Novo instrumento" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newInstrumentForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputInstrument">Instrumento</label>
+            <input type="text" class="form-control" formControlName="instrumentName" id="inputInstrument" placeholder="Nome do Instrumento" />
+          </div>
+        </div>
+        <button (click)="registerInstrument()" class="btn btn-primary">Cadastrar</button>
+      </form>
+  </app-card>
+  </div>
+  
