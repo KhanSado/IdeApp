@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Observable, from, of } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +22,32 @@ export class SignInService{
     this.user$ = this.auth.authState;
    }
 
-   // Mock implementation of getUserId. Replace with actual implementation.
    private getUserId(): Promise<string | null> {
     return this.auth.currentUser.then(user => user ? user.uid : null);
   }
-
-  signin(params: SignIn): Observable<any>{
-      return from(
-        this.auth.signInWithEmailAndPassword(
-          params.email, params.password
-        )
-      )
+  signin(params: SignIn): Observable<any> {
+    return from(
+      this.auth.signInWithEmailAndPassword(params.email, params.password)
+        .then(userCredential => {
+          return userCredential;
+        })
+        .catch(error => {
+          if (error == "FirebaseError: Firebase: The supplied auth credential is incorrect, malformed or has expired. (auth/invalid-credential).") {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Email ou senha incorreto, verifique suas credênciais e tente novamente ou contate um administrador do sistema"
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Um erro ocorreu, verifique suas credênciais e tente novamente !"
+            });
+          }
+          return { error };
+        })
+    );
   }
 
   signup(params:SignUp): Observable<any>{
@@ -57,7 +73,6 @@ export class SignInService{
     this.firestore.doc(`users/${userId}`).update ({
       id: userId
     })
-    console.log('User created with ID:', userId);
   })
   .catch(error => {
     console.error('Error creating visitor:', error);

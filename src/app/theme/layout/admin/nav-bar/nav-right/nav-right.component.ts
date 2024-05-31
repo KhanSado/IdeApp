@@ -54,12 +54,6 @@ export class NavRightComponent implements OnInit{
     this.signInService.logout()
   }
 
-  // async getUser() {
-  //   await this.signInService.findData();
-  //   this.name = this.signInService.nome;
-  //   console.log('User name:', this.name);
-  // }
-
   async findData(): Promise<string | null> {
     try {
       const uid = await this.getUserId();
@@ -72,14 +66,17 @@ export class NavRightComponent implements OnInit{
           return this.name;
         } else {
           console.log('Documento não encontrado');
+          this.logout()
           return null;
         }
-      } else {
+      } else {        
         console.log('Usuário não está logado');
+        // this.logout()
         return null;
       }
     } catch (error) {
       console.error('Erro ao obter UID do usuário:', error);
+      this.logout()
       return null;
     }
   }
