@@ -1,1 +1,28 @@
-<p>new-musician works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Novo Músico" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newMusicianForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputName">Nome</label>
+            <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Nome do Músico" />
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="restrictions">Restrição</label>
+            <input type="text" class="form-control" formControlName="restrictions" id="restrictions" placeholder="Rstrições" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputInstrumentName">Instrumento</label>
+            <select id="inputInstrumentName" class="form-control" formControlName="instrument">
+              <option selected>Selecione</option>
+              <option *ngFor="let instrument of instrumentList" value="{{ instrument.id }}">{{ instrument.instrumentName }}</option>
+            </select>
+          </div>
+        </div>
+  
+        <button (click)="registerMusician()" class="btn btn-primary">Cadastrar</button>
+      </form>
+  </app-card>
+  </div>
