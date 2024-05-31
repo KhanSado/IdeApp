@@ -56,6 +56,21 @@ const routes: Routes = [
         path: 'cult-control/cult-details/:id',
         loadComponent: () => import('./demo/cult-control/cult-details/cult-details.component').then(m => m.CultDetailsComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'praise-scale/dashboard',
+        loadComponent: () => import('./demo/praise-scale/praise-scale.component').then(m => m.PraiseScaleComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'praise-scale/new-musician',
+        loadComponent: () => import('./demo/praise-scale/new-musician/new-musician.component').then(m => m.NewMusicianComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'praise-scale/new-instrument',
+        loadComponent: () => import('./demo/praise-scale/new-instrument/new-instrument.component').then(m => m.NewInstrumentComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },

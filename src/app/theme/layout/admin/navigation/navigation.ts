@@ -77,6 +77,32 @@ export const NavigationItems: NavigationItem[] = [
           }
         ]
   },
+  {
+    id: 'praise-scale',
+    title: 'Escala de Louvor',
+    type: 'collapse',
+    icon: 'feather icon-music',
+    children: [
+      {
+        id: 'cults-dashboard',
+        title: 'Escala',
+        type: 'item',
+        url: 'praise-scale/dashboard'
+      },
+      {
+        id: 'new-instruments',
+        title: 'Novo Instrumento',
+        type: 'item',
+        url: 'praise-scale/new-instrument'
+      },
+      {
+        id: 'new-musician',
+        title: 'Novo Músico',
+        type: 'item',
+        url: 'praise-scale/new-musician'
+      },
+    ]
+},
     ]
   },
 ];
