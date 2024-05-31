@@ -34,7 +34,6 @@ createCult(params: Cult): Promise<void> {
         return this.firestore.doc(`cult/${cultId}`).update({
           id: cultId
         }).then(() => {
-          console.log('Cult created with ID:', cultId);
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -81,8 +80,6 @@ createVisitor(params: Visitor): Promise<void> {
             qtdVisitas: firebase.firestore.FieldValue.increment(1)
           });
         }).then(() => {
-       console.log('Visitor created with ID:', visitorId);
-       console.log('Visitor created with ID:', visitorId);
 
           console.log('Visitor created with ID:', visitorId);
 
