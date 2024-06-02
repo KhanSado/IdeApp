@@ -55,7 +55,7 @@ export class PraiseScaleService implements OnInit {
 
   createMusician(params: Musician): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      if (params.name.length > 0 && params.instrument.length > 0 && params.restrictions.length > 0) {
+      if (params.name.length > 0 && params.instrument.length) {
         this.firestore.collection('musician').add({
           name: params.name,
           instrument: params.instrument,
@@ -98,7 +98,6 @@ export class PraiseScaleService implements OnInit {
       }
     });
   }
-
 
   async findInstruments(): Promise<Instrument[]> {
     try {

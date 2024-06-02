@@ -42,10 +42,9 @@ export class NewMusicianComponent implements OnInit{
     this.service.createMusician({
       id: "",
       name: this.name.value,
-      restrictions: this.restrictions.value,
+      restrictions: this.restrictions.value || "",
       instrument: this.instrument.value
     }).then(() => {
-      // Limpar os campos após salvar
       this.name.reset();
       this.restrictions.reset();
       this.instrument.reset();
