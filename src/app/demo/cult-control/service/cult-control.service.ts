@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import Swal from 'sweetalert2';
@@ -8,152 +9,210 @@ import Swal from 'sweetalert2';
 })
 export class CultControlService implements OnInit {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,  private auth: AngularFireAuth) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getCurrentUserId(): Promise<string | null> {
+    return this.auth.currentUser.then(user => user ? user.uid : null);
+  }
+  
+  async getUserDocumentId(userId: string): Promise<string> {
+    try {
+      const querySnapshot = await this.firestore.collection('users', ref => ref.where('userId', '==', userId)).get().toPromise();
+      
+      if (!querySnapshot || querySnapshot.empty) {
+        throw new Error('User document not found');
+      }
+  
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.id;
+    } catch (error) {
+      console.error('Error fetching user document:', error);
+      throw new Error('Erro ao recuperar o documento do usuário');
+    }
   }
 
-createCult(params: Cult): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    if ((params.data.toString().length > 0)
-      && (params.pregador.length > 0)
-      && (params.qtdAdultos.toString().length > 0)
-      && (params.qtdCriancasAdolescentes.toString().length > 0)
-      && (params.reception.length > 0)
-      && (params.tema.length > 0)) {
-
-      this.firestore.collection('cult').add({
-        data: params.data,
-        tema: params.tema,
-        pregador: params.pregador,
-        qtdAdultos: params.qtdAdultos,
-        qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
-        receptionTeam: params.reception
-      }).then(cultRef => {
-        const cultId = cultRef.id;
-        return this.firestore.doc(`cult/${cultId}`).update({
-          id: cultId
-        }).then(() => {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Novo culto adicionado",
-            showConfirmButton: true,
-            confirmButtonText: "Ok",
-            timer: 1500
-          });
-          resolve();
-        });
-      }).catch(error => {
-        console.error('Error creating cult:', error);
+  async createCult(params: Cult): Promise<void> {
+    try {
+      const userId = await this.getCurrentUserId();
+      if (!userId) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Ocorreu um erro ao cadastrar o culto"
+          text: "Usuário não está autenticado."
         });
-        reject(error);
-      });
-    } else {
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+  
+      if ((params.data.toString().length > 0)
+        && (params.pregador.length > 0)
+        && (params.qtdAdultos.toString().length > 0)
+        && (params.qtdCriancasAdolescentes.toString().length > 0)
+        && (params.reception.length > 0)
+        && (params.tema.length > 0)) {
+
+        const cultRef = await this.firestore.collection('cult').add({
+          data: params.data,
+          tema: params.tema,
+          pregador: params.pregador,
+          qtdAdultos: params.qtdAdultos,
+          qtdCriancasAdolescentes: params.qtdCriancasAdolescentes,
+          receptionTeam: params.reception,
+          userId: userId,
+          userDocId: userDocId 
+        });
+  
+        await this.firestore.doc(`cult/${cultRef.id}`).update({ id: cultRef.id });
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Novo culto adicionado",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Por favor, preencha todos os campos."
+        });
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating cult:', error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Por favor, preencha todos os campos."
+        text: "Ocorreu um erro ao cadastrar o culto"
       });
-      reject(new Error('Invalid input'));
     }
-  });
-}
-createVisitor(params: Visitor): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    if (params.name.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0) {
-      this.firestore.collection('visitor').add({
-        name: params.name,
-        phone: params.phone,
-        recievVisit: params.recievVisit,
-        visitedCult: params.visitedCult
-      }).then(visitorRef => {
+  }
+
+
+  async createVisitor(params: Visitor): Promise<void> {
+    try {
+      const userId = await this.getCurrentUserId();
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuário não está autenticado."
+        });
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+  
+      if (params.name.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0) {
+  
+        const visitorRef = await this.firestore.collection('visitor').add({
+          name: params.name,
+          phone: params.phone,
+          recievVisit: params.recievVisit,
+          visitedCult: params.visitedCult,
+          userId: userId,
+          userDocId: userDocId
+        });
+  
         const visitorId = visitorRef.id;
-        return this.firestore.doc(`visitor/${visitorId}`).update({
+  
+        await this.firestore.doc(`visitor/${visitorId}`).update({
           id: visitorId
-        }).then(() => {
-          return this.firestore.doc(`cult/${params.visitedCult}`).update({
-            qtdVisitas: firebase.firestore.FieldValue.increment(1)
-          });
-        }).then(() => {
-
-          console.log('Visitor created with ID:', visitorId);
-
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Novo Visitante adicionado",
-            showConfirmButton: true,
-            confirmButtonText: "Ok",
-            timer: 1500
-          });
-          resolve();
         });
-      }).catch(error => {
-        console.error('Error creating visitor:', error);
+  
+        await this.firestore.doc(`cult/${params.visitedCult}`).update({
+          qtdVisitas: firebase.firestore.FieldValue.increment(1)
+        });
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Novo Visitante adicionado",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+  
+      } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Ocorreu um erro ao cadastrar novo visitante"
+          text: "Por favor, preencha todos os campos."
         });
-        reject(error);
-      });
-    } else {
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating visitor:', error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Por favor, preencha todos os campos."
+        text: "Ocorreu um erro ao cadastrar novo visitante"
       });
-      reject(new Error('Invalid input'));
     }
-  });
-}
+  }
 
-createReceptionTeam(params: ReceptionTeam): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    if (params.name.length > 0 && params.lead.length > 0) {
-      this.firestore.collection('receptionTeam').add({
-        name: params.name,
-        lead: params.lead
-      }).then(receptionTeamRef => {
+  async createReceptionTeam(params: ReceptionTeam): Promise<void> {
+    try {
+      const userId = await this.getCurrentUserId();
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuário não está autenticado."
+        });
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+  
+      if (params.name.length > 0 && params.lead.length > 0) {
+  
+        const receptionTeamRef = await this.firestore.collection('receptionTeam').add({
+          name: params.name,
+          lead: params.lead,
+          userId: userId, 
+          userDocId: userDocId
+        });
+  
         const receptionTeamId = receptionTeamRef.id;
-        return this.firestore.doc(`receptionTeam/${receptionTeamId}`).update({
+  
+        await this.firestore.doc(`receptionTeam/${receptionTeamId}`).update({
           id: receptionTeamId
-        }).then(() => {
-          console.log('Reception Team created with ID:', receptionTeamId);
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Nova equipe de recepção adicionada",
-            showConfirmButton: true,
-            confirmButtonText: "Ok",
-            timer: 1500
-          });
-          resolve();
         });
-      }).catch(error => {
-        console.error('Error creating reception team:', error);
+  
+        console.log('Reception Team created with ID:', receptionTeamId);
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Nova equipe de recepção adicionada",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+  
+      } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Ocorreu um erro ao cadastrar nova equipe de recepção"
+          text: "Por favor, preencha todos os campos."
         });
-        reject(error);
-      });
-    } else {
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating reception team:', error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Por favor, preencha todos os campos."
+        text: "Ocorreu um erro ao cadastrar nova equipe de recepção"
       });
-      reject(new Error('Invalid input'));
     }
-  });
-}
+  }
 
   async findData(): Promise<Cult[]> {
     try {
@@ -209,10 +268,6 @@ createReceptionTeam(params: ReceptionTeam): Promise<void> {
     }
   }
 
-
-
-
-
   async findVisitorByCult(cultId: string): Promise<Visitor[]> {
     try {
       const collectionRef = this.firestore.collection('visitor');
@@ -244,7 +299,6 @@ createReceptionTeam(params: ReceptionTeam): Promise<void> {
     }
   }
 
-
   async findCultById(id: string): Promise<Cult | undefined> {
     try {
       const docRef = this.firestore.collection('cult').doc(id);
@@ -263,10 +317,6 @@ createReceptionTeam(params: ReceptionTeam): Promise<void> {
       throw error;
     }
   }
-  
-  
-  
-
 }
 
 type Cult = {
