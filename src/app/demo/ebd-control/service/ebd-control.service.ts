@@ -273,6 +273,37 @@ export class EbdControlService implements OnInit {
       throw error;
     }
   }
+
+  async findClassroomByClass(classId: string): Promise<Classroom[]> {
+    try {
+      const collectionRef = this.firestore.collection('ebdClassroom');
+      const querySnapshot = await collectionRef.get().toPromise();
+
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return [];
+      }
+
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return [];
+      }
+
+      const documents: Classroom[] = [];
+      querySnapshot.forEach(doc => {
+          if ((doc.data() as Classroom).class == classId) {
+            console.log(doc.data() as Classroom);
+            documents.push(doc.data() as Classroom);               
+          }          
+          console.log(documents);
+      });
+      console.log(documents);
+      return documents;
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
+    }
+  }
 }
 
 type Professor = {

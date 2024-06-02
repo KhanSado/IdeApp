@@ -84,6 +84,12 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'feather icon-book',
     children: [
       {
+        id: 'classroom-dashboard',
+        title: 'Aulas Registradas',
+        type: 'item',
+        url: 'ebd-control/classroom-dashboard'
+      },
+      {
         id: 'new-professor',
         title: 'Novo Professor',
         type: 'item',
