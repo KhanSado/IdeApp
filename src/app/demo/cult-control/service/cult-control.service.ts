@@ -93,7 +93,6 @@ export class CultControlService implements OnInit {
     }
   }
 
-
   async createVisitor(params: Visitor): Promise<void> {
     try {
       const userId = await this.getCurrentUserId();

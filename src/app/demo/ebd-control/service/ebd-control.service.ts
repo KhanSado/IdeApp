@@ -192,6 +192,87 @@ export class EbdControlService implements OnInit {
       throw error;
     }
   }
+
+  async createClassroom(params: Classroom): Promise<void> {
+    try {
+      const userId = await this.getCurrentUserId();
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuário não está autenticado."
+        });
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+  
+      if ((params.data.toString().length > 0)
+        && (params.qtdPresentes.toString.length > 0)
+        && (params.class.length > 0)) {
+
+        const classroomRef = await this.firestore.collection('ebdClassroom').add({
+          data: params.data,
+          qtdPresentes: params.qtdPresentes,
+          class: params.class,
+          userId: userId,
+          userDocId: userDocId 
+        });
+  
+        await this.firestore.doc(`ebdClassroom/${classroomRef.id}`).update({ id: classroomRef.id });
+  
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Nova aula adicionada",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Por favor, preencha todos os campos."
+        });
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating aula:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocorreu um erro ao cadastrar o aula"
+      });
+    }
+  }
+
+  async findClassroom(): Promise<Classroom[]> {
+    try {
+      const collectionRef = this.firestore.collection('ebdClassroom');
+      const querySnapshot = await collectionRef.get().toPromise();
+
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return [];
+      }
+
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return [];
+      }
+
+      const documents: Classroom[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push(doc.data() as Classroom);
+      });
+
+      return documents;
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
+    }
+  }
 }
 
 type Professor = {
@@ -203,4 +284,11 @@ type Class = {
   id: string;
   name: string,
   professor: string
+}
+
+type Classroom = {
+  id: string;
+  data: Date,
+  class: string,
+  qtdPresentes:number
 }

@@ -1,1 +1,30 @@
-<p>new-classroom works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Nova Aula" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newClassroomForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputData">Data</label>
+            <input type="date" class="form-control" formControlName="data" id="inputData" placeholder="Data da aula" />
+          </div>
+        </div>
+      
+        <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputQtdPresente">Número Alunos Presentes</label>
+              <input type="number" class="form-control" formControlName="qtdPresentes" id="inputQtdPresente" placeholder="Quantidade de Alunos Presentes" />
+            </div>
+        
+            <div class="form-group col-md-6">
+                <label for="inputClass">Turma</label>
+                <select id="inputClass" class="form-control" formControlName="class">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
+                </select>
+              </div>
+          </div>
+
+        <button (click)="registerClassroom()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  
