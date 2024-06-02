@@ -1,0 +1,14 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Novo Professor" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newProfessorForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputNomeProfessor">Nome do Professor</label>
+            <input type="text" class="form-control" formControlName="name" id="inputNomeProfessor" placeholder="Nome do Professor" />
+          </div>
+        </div>
+        <button (click)="registerProfessor()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  

@@ -77,6 +77,32 @@ export const NavigationItems: NavigationItem[] = [
           }
         ]
   },
+  {
+    id: 'ebd-control',
+    title: 'Escola Bíblica Dominical',
+    type: 'collapse',
+    icon: 'feather icon-book',
+    children: [
+      {
+        id: 'new-professor',
+        title: 'Novo Professor',
+        type: 'item',
+        url: 'ebd-control/new-professor'
+      },
+      {
+        id: 'new-class',
+        title: 'Nova Turma',
+        type: 'item',
+        url: 'ebd-control/new-class'
+      },
+      {
+        id: 'new-classroom',
+        title: 'Nova Aula',
+        type: 'item',
+        url: 'ebd-control/new-classroom'
+      }
+    ]
+},
     ]
   },
 ];

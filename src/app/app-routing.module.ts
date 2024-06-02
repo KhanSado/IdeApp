@@ -56,6 +56,21 @@ const routes: Routes = [
         path: 'cult-control/cult-details/:id',
         loadComponent: () => import('./demo/cult-control/cult-details/cult-details.component').then(m => m.CultDetailsComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-professor',
+        loadComponent: () => import('./demo/ebd-control/new-professor/new-professor.component').then(m => m.NewProfessorComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-class',
+        loadComponent: () => import('./demo/ebd-control/new-class/new-class.component').then(m => m.NewClassComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-classroom',
+        loadComponent: () => import('./demo/ebd-control/new-classroom/new-classroom.component').then(m => m.NewClassroomComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },

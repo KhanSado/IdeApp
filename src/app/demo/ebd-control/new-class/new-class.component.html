@@ -1,0 +1,22 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Novo Culto" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newClassForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputPregador">Nome da Turma</label>
+            <input type="text" class="form-control" formControlName="name" id="inputPregador" placeholder="Nome da Turma" />
+          </div>
+
+          <div class="form-group col-md-16">
+            <label for="inputProfessor">Professor da Turma</label>
+            <select id="inputProfessor" class="form-control" formControlName="professor">
+              <option selected>Selecione</option>
+              <option *ngFor="let professor of professorList" value="{{professor.id}}">{{ professor.name }}</option>
+            </select>
+          </div>
+        </div>
+        <button (click)="registerClass()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  
