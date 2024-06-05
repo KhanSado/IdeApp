@@ -16,6 +16,8 @@ export class NewClassroomComponent implements OnInit{
 
   newClassroomForm!: FormGroup
   ClassList: Class[] = [];
+  studentList: Student[] = [];
+  // cultList: Cult[] = [];
 
   constructor(private service: EbdControlService) { }
 
@@ -55,7 +57,7 @@ export class NewClassroomComponent implements OnInit{
       id: "",
       data: this.data.value,
       class: this.class.value,
-      qtdPresentes: this.qtdPresentes.value
+      qtdPresentes: 0
     }).then(() => {
       // Limpar os campos após salvar
       this.data.reset();
@@ -66,10 +68,39 @@ export class NewClassroomComponent implements OnInit{
       console.error('Erro ao criar aula: ', error);
     });
   }
+
+  async searchStudentByClass() {
+    if (this.class.invalid) {
+      console.error('turma precisa ser selecionada');
+      return; 
+    }
+
+    const classiD = this.class.value;
+
+    try {
+      const documents = await this.service.findStudentsByClass(classiD);
+      if (documents && documents.length > 0) {
+        this.studentList = []; 
+        this.studentList = documents        
+      } else {
+        this.studentList = []; 
+        console.log('Nenhum documento encontrado');
+      }
+    } catch (error) {
+      this.studentList = []; 
+      console.error('Erro ao buscar documentos:', error);
+    }
+  }
 }
 
 type Class = {
   id: string;
   name: string,
   professor: string
+}
+
+type Student = {
+  id: string,
+  name: string,
+  class: string
 }

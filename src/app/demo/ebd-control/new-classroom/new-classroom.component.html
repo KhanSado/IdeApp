@@ -9,22 +9,33 @@
         </div>
       
         <div class="row">
-            <div class="form-group col-md-6">
-              <label for="inputQtdPresente">Número Alunos Presentes</label>
-              <input type="number" class="form-control" formControlName="qtdPresentes" id="inputQtdPresente" placeholder="Quantidade de Alunos Presentes" />
-            </div>
-        
-            <div class="form-group col-md-6">
-                <label for="inputClass">Turma</label>
+            <div class="form-group col-md-10">
                 <select id="inputClass" class="form-control" formControlName="class">
                   <option selected>Selecione</option>
                   <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
                 </select>
               </div>
+              <div class="form-group col-md-2">
+                <button (click)="searchStudentByClass()" class="btn btn-primary">Buscar</button>
+              </div>
           </div>
 
         <button (click)="registerClassroom()" class="btn btn-primary">Cadastrar</button>
       </form>
+
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+            <tr class="table-primary">
+              <th>Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of studentList">
+              <td>{{ student.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </app-card>
   </div>
-  
