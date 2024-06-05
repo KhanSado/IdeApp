@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat';
+import firebase from 'firebase/compat/app';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -304,6 +304,90 @@ export class EbdControlService implements OnInit {
       throw error;
     }
   }
+
+  async createStudent(params: Student): Promise<void> {    
+    try {
+      const userId = await this.getCurrentUserId();
+
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuário não está autenticado."
+        });
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+
+      if ((params.name.length > 0)
+        && (params.class.length > 0)) {
+          
+        const studentRef = await this.firestore.collection('ebdStudent').add({
+          name: params.name,
+          class: params.class,
+          userId: userId,
+          userDocId: userDocId 
+        });
+  
+        await this.firestore.doc(`ebdStudent/${studentRef.id}`).update({ id: studentRef.id });
+
+        await this.firestore.doc(`ebdClass/${params.class}`).update({
+          qtdStudents: firebase.firestore.FieldValue.increment(1)
+        });
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Novo aluno adicionado",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Por favor, preencha todos os campos."
+        });
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating student:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocorreu um erro ao cadastrar aluno"
+      });
+    }
+  }
+
+  async findStudent(): Promise<Student[]> {
+    try {
+      const collectionRef = this.firestore.collection('ebdStudent');
+      const querySnapshot = await collectionRef.get().toPromise();
+
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return [];
+      }
+
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return [];
+      }
+
+      const documents: Student[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push(doc.data() as Student);
+      });
+
+      return documents;
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
+    }
+  }
 }
 
 type Professor = {
@@ -314,6 +398,7 @@ type Professor = {
 type Class = {
   id: string;
   name: string,
+  qtdStudents: number,
   professor: string
 }
 
@@ -322,4 +407,10 @@ type Classroom = {
   data: Date,
   class: string,
   qtdPresentes:number
+}
+
+type Student = {
+  id: string,
+  name: string,
+  class: string
 }

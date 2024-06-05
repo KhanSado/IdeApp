@@ -6,38 +6,38 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
 
 @Component({
-  selector: 'app-new-class',
+  selector: 'app-new-student',
   standalone: true,
   imports: [CommonModule, SharedModule, RouterModule],
-  templateUrl: './new-class.component.html',
-  styleUrl: './new-class.component.scss'
+  templateUrl: './new-student.component.html',
+  styleUrl: './new-student.component.scss'
 })
-export class NewClassComponent implements OnInit{
+export class NewStudentComponent implements OnInit{
 
-  newClassForm!: FormGroup
-  professorList: Professor[] = [];
+  newStudentForm!: FormGroup
+  ClassList: Class[] = [];
 
   constructor(private service: EbdControlService) { }
 
   ngOnInit(): void {
-    this.findProfessor()
-    this.newClassForm = new FormGroup({
+    this.findClass()
+    this.newStudentForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      professor: new FormControl('', [Validators.required])
+      class: new FormControl('', [Validators.required]),
     })
   }
   get name() {
-    return this.newClassForm.get('name')!
+    return this.newStudentForm.get('name')!
   }
-  get professor() {
-    return this.newClassForm.get('professor')!
+  get class() {
+    return this.newStudentForm.get('class')!
   }
 
-  async findProfessor() {
+  async findClass() {
     try {
-      const documents = await this.service.findData();
+      const documents = await this.service.findClass();
       if (documents && documents.length > 0) {
-        this.professorList = documents;
+        this.ClassList = documents;
       } else {
         console.log('Nenhum documento encontrado');
       }
@@ -46,23 +46,26 @@ export class NewClassComponent implements OnInit{
     }
   }
 
-  registerClass(){
-    this.service.createClass({
+  registerStudent(){
+    console.log(this.name.value);
+    console.log(this.class.value);
+    
+    
+    this.service.createStudent({
       id: "",
       name: this.name.value,
-      professor: this.professor.value,
-      qtdStudents: 0
+      class: this.class.value,
     }).then(() => {
       this.name.reset();
-      this.professor.reset();
-
+      this.class.reset();
     }).catch((error) => {
-      console.error('Erro ao criar turma: ', error);
+      console.error('Erro ao criar aluno: ', error);
     });
   }
 }
 
-type Professor = {
+type Class = {
   id: string;
-  name: string
+  name: string,
+  professor: string
 }

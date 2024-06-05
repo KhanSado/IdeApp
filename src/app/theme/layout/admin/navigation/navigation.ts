@@ -106,9 +106,16 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Nova Aula',
         type: 'item',
         url: 'ebd-control/new-classroom'
+      },
+      {
+        id: 'new-student',
+        title: 'Novo Aluno',
+        type: 'item',
+        url: 'ebd-control/new-student'
       }
     ]
 },
     ]
   },
 ];
+
