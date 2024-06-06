@@ -19,8 +19,6 @@
                 <button (click)="searchStudentByClass()" class="btn btn-primary">Buscar</button>
               </div>
           </div>
-
-        <button (click)="registerClassroom()" class="btn btn-primary">Cadastrar</button>
       </form>
 
       <div class="table-responsive">
@@ -28,14 +26,19 @@
           <thead>
             <tr class="table-primary">
               <th>Nome</th>
+              <th>Presença</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let student of studentList">
               <td>{{ student.name }}</td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.present"/>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <button (click)="registerClassroom()" class="btn btn-primary">Cadastrar</button>
     </app-card>
   </div>

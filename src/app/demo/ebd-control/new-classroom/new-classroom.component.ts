@@ -53,17 +53,18 @@ export class NewClassroomComponent implements OnInit{
   }
 
   registerClassroom(){
+    const qtdPresentes = this.studentList.filter(student => student.present).length;
+
     this.service.createClassroom({
       id: "",
       data: this.data.value,
       class: this.class.value,
-      qtdPresentes: 0
+      qtdPresentes: qtdPresentes
     }).then(() => {
-      // Limpar os campos após salvar
       this.data.reset();
       this.class.reset();
       this.qtdPresentes.reset();
-
+      this.studentList.forEach(student => student.present = false);
     }).catch((error) => {
       console.error('Erro ao criar aula: ', error);
     });
@@ -102,5 +103,6 @@ type Class = {
 type Student = {
   id: string,
   name: string,
-  class: string
+  class: string,
+  present: boolean
 }

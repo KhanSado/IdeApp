@@ -326,6 +326,7 @@ export class EbdControlService implements OnInit {
         const studentRef = await this.firestore.collection('ebdStudent').add({
           name: params.name,
           class: params.class,
+          present: false,
           userId: userId,
           userDocId: userDocId 
         });
@@ -443,5 +444,6 @@ type Classroom = {
 type Student = {
   id: string,
   name: string,
-  class: string
+  class: string,
+  present: boolean
 }
