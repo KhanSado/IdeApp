@@ -214,6 +214,8 @@ export class EbdControlService implements OnInit {
         const classroomRef = await this.firestore.collection('ebdClassroom').add({
           data: params.data,
           qtdPresentes: params.qtdPresentes,
+          qtdBible: params.qtdBible,
+          qtdMaterials: params.qtdMaterials,
           class: params.class,
           userId: userId,
           userDocId: userDocId 
@@ -438,12 +440,16 @@ type Classroom = {
   id: string;
   data: Date,
   class: string,
-  qtdPresentes:number
+  qtdPresentes:number,
+  qtdBible: number,
+  qtdMaterials: number
 }
 
 type Student = {
   id: string,
   name: string,
   class: string,
-  present: boolean
+  present: boolean,
+  bible: boolean,
+  material: boolean
 }

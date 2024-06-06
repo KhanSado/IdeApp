@@ -55,7 +55,9 @@ export class NewStudentComponent implements OnInit{
       id: "",
       name: this.name.value,
       class: this.class.value,
-      present: false
+      present: false,
+      bible: false,
+      material: false
     }).then(() => {
       this.name.reset();
       this.class.reset();

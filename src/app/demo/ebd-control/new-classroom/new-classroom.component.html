@@ -27,6 +27,8 @@
             <tr class="table-primary">
               <th>Nome</th>
               <th>Presença</th>
+              <th>Biblia</th>
+              <th>Revista/Livro</th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +36,12 @@
               <td>{{ student.name }}</td>
               <td>
                 <input type="checkbox" [(ngModel)]="student.present"/>
+              </td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.bible"/>
+              </td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.material"/>
               </td>
             </tr>
           </tbody>
