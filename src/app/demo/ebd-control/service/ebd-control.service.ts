@@ -217,6 +217,7 @@ export class EbdControlService implements OnInit {
           qtdBible: params.qtdBible,
           qtdMaterials: params.qtdMaterials,
           class: params.class,
+          offer: params.offer,
           userId: userId,
           userDocId: userDocId 
         });
@@ -442,7 +443,8 @@ type Classroom = {
   class: string,
   qtdPresentes:number,
   qtdBible: number,
-  qtdMaterials: number
+  qtdMaterials: number,
+  offer: number
 }
 
 type Student = {
