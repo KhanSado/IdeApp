@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
 
@@ -19,7 +19,7 @@ export class ClassroomDashboardComponent implements OnInit {
   classList: Class[] = [];
   message: string | undefined;
   
-  constructor(private service: EbdControlService) {}
+  constructor(private service: EbdControlService, private router: Router) {}
 
   ngOnInit(): void {
     this.findClass()
@@ -73,6 +73,14 @@ export class ClassroomDashboardComponent implements OnInit {
       this.message = "Nenhum documento encontrado"
       console.error('Erro ao buscar documentos:', error);
     }
+  }
+
+  async showDetails(id: string) {
+    try {
+      this.router.navigate(['/ebd-control/classroom-details/', id]);
+    } catch (error) {
+      console.error('Erro ao buscar documento:', error);
+    }    
   }
 }
 

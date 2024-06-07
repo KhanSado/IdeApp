@@ -23,12 +23,16 @@
             <tr class="table-primary">
               <th>Data</th>
               <th>Quantidade de Presentes</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let cr of classroomList">
               <td>{{ cr.data }}</td>
               <td>{{ cr.qtdPresentes }}</td>
+              <td>
+                <button class="btn btn-light-primary" (click)="showDetails(cr.id)"> Detalhes </button> 
+              </td>
             </tr>
           </tbody>
         </table>

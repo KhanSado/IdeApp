@@ -81,6 +81,11 @@ const routes: Routes = [
         path: 'ebd-control/new-student',
         loadComponent: () => import('./demo/ebd-control/new-student/new-student.component').then(m => m.NewStudentComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/classroom-details/:id',
+        loadComponent: () => import('./demo/ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },
