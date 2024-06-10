@@ -17,7 +17,6 @@ export class NewClassroomComponent implements OnInit{
   newClassroomForm!: FormGroup
   ClassList: Class[] = [];
   studentList: Student[] = [];
-  // cultList: Cult[] = [];
 
   constructor(private service: EbdControlService) { }
 
