@@ -74,6 +74,10 @@ const routes: Routes = [
       {
         path: 'profissionais',
         loadComponent: () => import('./demo/public-announcements/public-announcements.component').then(m => m.PublicAnnouncementsComponent)
+      },
+      {
+        path: 'resources',
+        loadComponent: () => import('./demo/resources/resources.component').then(m => m.ResourcesComponent)
       }
     ]
   }
