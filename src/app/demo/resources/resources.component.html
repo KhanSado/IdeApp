@@ -1,70 +1,74 @@
+<div class="col-xl-12" class="auth-wrapper">
+    <app-card cardTitle="Recursos Visuais Presbiteriana Palmas Norte" [options]="false" blockClass="table-border-style">
 
-<div class="auth-wrapper">
-    <div class="auth-content">
-     
-        <div class="col-12">
-            <app-card cardTitle="Recursos Visuais IPPN" [options]="false">
+        <div class="row">
+            <div class="form-group col-md-4">
                 <div *ngIf="filePreviewSpecsUrl" class="file-preview">
+                    <img [src]="filePreviewSpecsUrl" alt="File Preview" *ngIf="isImageFileSpecs()" />
+                    <p *ngIf="!isImageFileSpecs()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Arquivo Especificações SVG</p>
+                  </div>
 
-                    <div class="col-3">
-                        <img [src]="filePreviewSpecsUrl" alt="File Preview" *ngIf="isImageFileSpecs()" />
-                        <p *ngIf="!isImageFileSpecs()">Preview não disponível para este tipo de arquivo</p>
-                      </div>
-                    
-                      <!-- Download Button -->
-                      <button class="btn btn-block btn-primary mb-4" (click)="downloadFileSpecs()">Baixar Arquivo</button>
-                    </div>
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileSpecs()">Baixar Arquivo</button>
+            </div>
         
-                    <div class="col-3">
-                        <div *ngIf="filePreviewColorSimplesUrl" class="file-preview">
-                            <img [src]="filePreviewColorSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleColor()" />
-                            <p *ngIf="!isImageFileSimpleColor()">Preview não disponível para este tipo de arquivo</p>
-                          </div>
-                    </div>
-                  
-                
-                  <!-- Download Button -->
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewColorSimplesUrl" class="file-preview">
+                    <img [src]="filePreviewColorSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleColor()" />
+                    <p *ngIf="!isImageFileSimpleColor()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida PNG</p>
+                  </div>
+
                   <button class="btn btn-block btn-primary mb-4" (click)="downloadFileColorSimple()">Baixar Arquivo</button>
-                
-                  <div *ngIf="filePreviewPBSimplesUrl" class="file-preview">
+            </div>
+
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewPBSimplesUrl" class="file-preview">
                     <img [src]="filePreviewPBSimplesUrl" alt="File Preview" *ngIf="isImageFileSimplePB()" />
                     <p *ngIf="!isImageFileSimplePB()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca P&B PNG</p>
                   </div>
-                
-                  <!-- Download Button -->
+
                   <button class="btn btn-block btn-primary mb-4" (click)="downloadFilePBSimple()">Baixar Arquivo</button>
-                
-                  <div *ngIf="filePreviewOfficeSimplesUrl" class="file-preview">
-                    <img [src]="filePreviewOfficeSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleOffice()" />
-                    <p *ngIf="!isImageFileSimpleOffice()">Preview não disponível para este tipo de arquivo</p>
-                  </div>
-                
-                  <!-- Download Button -->
-                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileOfficeSimple()">Baixar Arquivo</button>
-                
-                
-                  <div *ngIf="filePreviewSimplesWithoutLetterUrl" class="file-preview">
-                    <img [src]="filePreviewSimplesWithoutLetterUrl" alt="File Preview" *ngIf="isImageFileWithoutLetter()" />
-                    <p *ngIf="!isImageFileWithoutLetter()">Preview não disponível para este tipo de arquivo</p>
-                  </div>
-                
-                  <!-- Download Button -->
-                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetter()">Baixar Arquivo</button>
-                
-                
-                  <div *ngIf="filePreviewSimplesWithoutLetterPBUrl" class="file-preview">
-                    <img [src]="filePreviewSimplesWithoutLetterPBUrl" alt="File Preview" *ngIf="isImageFileWithoutLetterPB()" />
-                    <p *ngIf="!isImageFileWithoutLetterPB()">Preview não disponível para este tipo de arquivo</p>
-                  </div>
-                
-                  <!-- Download Button -->
-                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetterPb()">Baixar Arquivo</button>
-                
-                <!-- <button class="btn btn-block btn-primary mb-4" (click)="downloadFile('assets/Logo-Specs.svg', 'Logo-Specs.svg')">Logo Especificacões Editável</button> -->
-                
-            </app-card>
+            </div>
           </div>
 
-    </div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewOfficeSimplesUrl" class="file-preview">
+                    <img [src]="filePreviewOfficeSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleOffice()" />
+                    <p *ngIf="!isImageFileSimpleOffice()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida Para fundo branco PNG</p>
+
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileOfficeSimple()">Baixar Arquivo</button>
+            </div>
+        
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewSimplesWithoutLetterUrl" class="file-preview">
+                    <img [src]="filePreviewSimplesWithoutLetterUrl" alt="File Preview" *ngIf="isImageFileWithoutLetter()" />
+                    <p *ngIf="!isImageFileWithoutLetter()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logo Colorida PNG</p>
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetter()">Baixar Arquivo</button>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewSimplesWithoutLetterPBUrl" class="file-preview">
+                    <img [src]="filePreviewSimplesWithoutLetterPBUrl" alt="File Preview" *ngIf="isImageFileWithoutLetterPB()" />
+                    <p *ngIf="!isImageFileWithoutLetterPB()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logo P&B PNG</p>
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetterPb()">Baixar Arquivo</button>
+                
+            </div>
+          </div>
+        
+    </app-card>
   </div>
+
   
