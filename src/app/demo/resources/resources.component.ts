@@ -18,6 +18,9 @@ export class ResourcesComponent {
   filePreviewSimplesWithoutLetterUrl: string | null = null;
   filePreviewSimplesWithoutLetterPBUrl: string | null = null;
 
+  filePreviewUphLogoUrl: string | null = null;
+
+
 
   constructor(private fileDownloadService: ResourcesServices) {}
 
@@ -28,6 +31,8 @@ export class ResourcesComponent {
     this.setFileOfficeSimplePreview();
     this.setFileWithoutLetterPBSimplePreview();
     this.setFileWithoutLetterSimplePreview();
+
+    this.setFileLogoUphPreview();
   }
 
   setFileSpecsPreview(): void {
@@ -57,6 +62,11 @@ export class ResourcesComponent {
     this.filePreviewSimplesWithoutLetterPBUrl = fileUrl; // Definindo o caminho do arquivo para pré-visualização
   }
 
+  setFileLogoUphPreview(): void {
+    const fileUrl = '/assets/uph.png'; // Caminho para o arquivo
+    this.filePreviewUphLogoUrl = fileUrl; // Definindo o caminho do arquivo para pré-visualização
+  }
+
   isImageFileSpecs(): boolean {
     // Verifica se o arquivo é uma imagem (você pode adicionar mais tipos de imagem se necessário)
     return this.filePreviewSpecsUrl ? this.filePreviewSpecsUrl.match(/\.(jpeg|jpg|gif|png|svg)$/i) !== null : false;
@@ -83,6 +93,11 @@ export class ResourcesComponent {
   isImageFileWithoutLetter(): boolean {
     // Verifica se o arquivo é uma imagem (você pode adicionar mais tipos de imagem se necessário)
     return this.filePreviewSimplesWithoutLetterUrl ? this.filePreviewSimplesWithoutLetterUrl.match(/\.(jpeg|jpg|gif|png|svg)$/i) !== null : false;
+  }
+
+  isImageFileUphLogo(): boolean {
+    // Verifica se o arquivo é uma imagem (você pode adicionar mais tipos de imagem se necessário)
+    return this.filePreviewUphLogoUrl ? this.filePreviewUphLogoUrl.match(/\.(jpeg|jpg|gif|png|svg)$/i) !== null : false;
   }
 
   downloadFileSpecs(): void {
@@ -149,6 +164,18 @@ downloadFileWithoutLetter(): void {
     link.download = 'v3.1-logo.png'; // Nome do arquivo ao baixar
     link.click();
   });
-
 }
+
+downloadFileLogoUph(): void {
+  const fileUrl = '/assets/uph.png'; // URL do arquivo
+  this.fileDownloadService.downloadFile(fileUrl).subscribe((blob) => {
+    const downloadURL = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = 'uph.png'; // Nome do arquivo ao baixar
+    link.click();
+  });
+}
+
+
 }

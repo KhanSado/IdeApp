@@ -67,6 +67,19 @@
                 
             </div>
           </div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewUphLogoUrl" class="file-preview">
+                    <img [src]="filePreviewUphLogoUrl" alt="File Preview" *ngIf="isImageFileUphLogo()" />
+                    <p *ngIf="!isImageFileUphLogo()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida Para fundo branco PNG</p>
+
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileLogoUph()">Baixar Arquivo</button>
+            </div>
+          </div>
         
     </app-card>
   </div>
