@@ -53,7 +53,7 @@ export class CultControlComponent implements OnInit{
   async loadMoreCults(limit: number) {
     try {
       if (this.lastVisible) {
-        await this.findCults(limit); // Continua a partir do último documento visível
+        await this.findCults(limit);
       }
     } catch (error) {
       console.error('Erro ao carregar mais cultos:', error);

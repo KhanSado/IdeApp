@@ -215,7 +215,7 @@ export class CultControlService implements OnInit {
 
   async findDataSimples(): Promise<Cult[]> {
     try {
-      const collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc').limit(5));
+      const collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc'));
       const querySnapshot = await collectionRef.get().toPromise();
 
       if (!querySnapshot) {
