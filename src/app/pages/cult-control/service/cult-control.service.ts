@@ -215,7 +215,7 @@ export class CultControlService implements OnInit {
 
   async findData(): Promise<Cult[]> {
     try {
-      const collectionRef = this.firestore.collection('cult');
+      const collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc'));
       const querySnapshot = await collectionRef.get().toPromise();
 
       if (!querySnapshot) {
@@ -242,7 +242,7 @@ export class CultControlService implements OnInit {
 
   async findReceptionTeam(): Promise<ReceptionTeam[]> {
     try {
-      const collectionRef = this.firestore.collection('receptionTeam');
+      const collectionRef = this.firestore.collection('receptionTeam', ref => ref.orderBy('name', 'desc'));;
       const querySnapshot = await collectionRef.get().toPromise();
 
       if (!querySnapshot) {
