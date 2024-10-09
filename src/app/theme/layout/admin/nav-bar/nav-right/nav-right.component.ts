@@ -5,7 +5,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 
 // bootstrap
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { SignInService } from 'src/app/authentication/sign-in/sign-in.service';
+import { SignInService } from 'src/app/pages/authentication/service/sign-in.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';

@@ -20,50 +20,50 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin', 'ebd', 'cult', 'praise'] } // Adicione as roles permitidas aqui
 
       },
       {
         path: 'announcement',
-        loadComponent: () => import('./announcement/announcement.component').then(m => m.AnnouncementComponent),
+        loadComponent: () => import('./pages/announcement/announcement.component').then(m => m.AnnouncementComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin'] }
       },
       {
         path: 'cult-control/dashboard',
-        loadComponent: () => import('./cult-control/cult-control.component').then(m => m.CultControlComponent),
+        loadComponent: () => import('./pages/cult-control/cult-control.component').then(m => m.CultControlComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
       {
         path: 'cult-control/new',
-        loadComponent: () => import('./cult-control/new-cult/new-cult.component').then(m => m.NewCultComponent),
+        loadComponent: () => import('./pages/cult-control/new-cult/new-cult.component').then(m => m.NewCultComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
       {
         path: 'cult-control/visitor',
-        loadComponent: () => import('./cult-control/new-cult-visit/new-cult-visit.component').then(m => m.NewCultVisitComponent),
+        loadComponent: () => import('./pages/cult-control/new-cult-visit/new-cult-visit.component').then(m => m.NewCultVisitComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
       {
         path: 'cult-control/reception-team',
-        loadComponent: () => import('./cult-control/reception-team/reception-team.component').then(m => m.ReceptionTeamComponent),
+        loadComponent: () => import('./pages/cult-control/reception-team/reception-team.component').then(m => m.ReceptionTeamComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
       {
         path: 'cult-control/visitor-list',
-        loadComponent: () => import('./cult-control/visitor/visitor.component').then(m => m.VisitorComponent),
+        loadComponent: () => import('./pages/cult-control/visitor/visitor.component').then(m => m.VisitorComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
       {
         path: 'cult-control/cult-details/:id',
-        loadComponent: () => import('./cult-control/cult-details/cult-details.component').then(m => m.CultDetailsComponent),
+        loadComponent: () => import('./pages/cult-control/cult-details/cult-details.component').then(m => m.CultDetailsComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','cult'] }
       },
@@ -73,44 +73,44 @@ const routes: Routes = [
       //Tela de não autoizado
       {
         path: 'route-not-authorized',
-        loadComponent: () => import('./not-authorized/not-authorized.component').then(m => m.NotAuthorizedComponent),
+        loadComponent: () => import('./pages/not-authorized/not-authorized.component').then(m => m.NotAuthorizedComponent),
         canActivate: [AuthGuard]
       },
 
 
       {
         path: 'ebd-control/new-professor',
-        loadComponent: () => import('./ebd-control/new-professor/new-professor.component').then(m => m.NewProfessorComponent),
+        loadComponent: () => import('./pages/ebd-control/new-professor/new-professor.component').then(m => m.NewProfessorComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       },
       {
         path: 'ebd-control/new-class',
-        loadComponent: () => import('./ebd-control/new-class/new-class.component').then(m => m.NewClassComponent),
+        loadComponent: () => import('./pages/ebd-control/new-class/new-class.component').then(m => m.NewClassComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       },
       {
         path: 'ebd-control/new-classroom',
-        loadComponent: () => import('./ebd-control/new-classroom/new-classroom.component').then(m => m.NewClassroomComponent),
+        loadComponent: () => import('./pages/ebd-control/new-classroom/new-classroom.component').then(m => m.NewClassroomComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       },
       {
         path: 'ebd-control/classroom-dashboard',
-        loadComponent: () => import('./ebd-control/classroom-dashboard/classroom-dashboard.component').then(m => m.ClassroomDashboardComponent),
+        loadComponent: () => import('./pages/ebd-control/classroom-dashboard/classroom-dashboard.component').then(m => m.ClassroomDashboardComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       },
       {
         path: 'ebd-control/new-student',
-        loadComponent: () => import('./ebd-control/new-student/new-student.component').then(m => m.NewStudentComponent),
+        loadComponent: () => import('./pages/ebd-control/new-student/new-student.component').then(m => m.NewStudentComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       },
       {
         path: 'ebd-control/classroom-details/:id',
-        loadComponent: () => import('./ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
+        loadComponent: () => import('./pages/ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
       }
@@ -122,19 +122,19 @@ const routes: Routes = [
     children: [
       {
         path: 'auth/signup',
-        loadComponent: () => import('./authentication/sign-up/sign-up.component')
+        loadComponent: () => import('./pages/authentication/sign-up/sign-up.component')
       },
       {
         path: 'auth/signin',
-        loadComponent: () => import('./authentication/sign-in/sign-in.component')
+        loadComponent: () => import('./pages/authentication/sign-in/sign-in.component')
       },
       {
         path: 'profissionais',
-        loadComponent: () => import('./public-announcements/public-announcements.component').then(m => m.PublicAnnouncementsComponent)
+        loadComponent: () => import('./public-pages/public-announcements/public-announcements.component').then(m => m.PublicAnnouncementsComponent)
       },
       {
         path: 'resources',
-        loadComponent: () => import('./resources/resources.component').then(m => m.ResourcesComponent)
+        loadComponent: () => import('./public-pages/resources/resources.component').then(m => m.ResourcesComponent)
       }
     ]
   }
