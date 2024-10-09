@@ -22,5 +22,10 @@
         </tbody>
       </table>
     </div>
+
+    <div *ngIf="hasMoreCults">
+      <button class="btn btn-light-primary" (click)="loadMoreCults(5)"> Mais </button> 
+    </div>
+
   </app-card>
 </div>

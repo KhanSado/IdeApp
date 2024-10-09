@@ -62,7 +62,7 @@ export class NewCultVisitComponent implements OnInit{
 
   async findCult() {
     try {
-      const documents = await this.service.findData();
+      const documents = await this.service.findDataSimples();
       if (documents && documents.length > 0) {
         this.cultList = documents;
       } else {

@@ -4,6 +4,9 @@ import { CultControlService } from './service/cult-control.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore'; // Importa Firestore corretamente no modo compat
+
 
 @Component({
   selector: 'app-cult-control',
@@ -13,6 +16,11 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
   styleUrl: './cult-control.component.scss'
 })
 export class CultControlComponent implements OnInit{
+
+  lastVisible: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> | null = null;
+
+  hasMoreCults: boolean = true; 
+
 
   newCultForm!: FormGroup
   cults: Cult[] = [];
@@ -24,16 +32,31 @@ export class CultControlComponent implements OnInit{
     this.findCults()
   }
 
-  async findCults() {
+  async findCults(limit: number = 5) {
     try {
-      const documents = await this.service.findData();
+      // Chama o serviço para buscar os cultos com paginação
+      const { documents, lastVisible } = await this.service.findData(this.lastVisible, limit);
+
       if (documents && documents.length > 0) {
-        this.cults = documents;
+        this.cults = [...this.cults, ...documents]; // Adiciona os novos cultos à lista existente
+        this.lastVisible = lastVisible; // Atualiza o último documento visível para paginação
+        this.hasMoreCults = true; // Existem mais cultos
       } else {
         console.log('Nenhum documento encontrado');
+        this.hasMoreCults = false; // Não há mais cultos para carregar
       }
     } catch (error) {
       console.error('Erro ao buscar documentos:', error);
+    }
+  }
+
+  async loadMoreCults(limit: number) {
+    try {
+      if (this.lastVisible) {
+        await this.findCults(limit); // Continua a partir do último documento visível
+      }
+    } catch (error) {
+      console.error('Erro ao carregar mais cultos:', error);
     }
   }
 

@@ -213,9 +213,9 @@ export class CultControlService implements OnInit {
     }
   }
 
-  async findData(): Promise<Cult[]> {
+  async findDataSimples(): Promise<Cult[]> {
     try {
-      const collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc'));
+      const collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc').limit(5));
       const querySnapshot = await collectionRef.get().toPromise();
 
       if (!querySnapshot) {
@@ -239,6 +239,45 @@ export class CultControlService implements OnInit {
       throw error;
     }
   }
+  async findData(lastVisible: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> | null = null, limit: number=2): Promise<PaginatedCult> {
+    try {
+      let collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc').limit(limit));
+  
+      // Se houver um último documento visível, continuar a partir desse ponto
+      if (lastVisible) {
+        collectionRef = this.firestore.collection('cult', ref => ref
+          .orderBy('data', 'desc')
+          .startAfter(lastVisible)
+          .limit(limit));
+      }
+  
+      const querySnapshot = await collectionRef.get().toPromise();
+  
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return { documents: [], lastVisible: null };
+      }
+  
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return { documents: [], lastVisible: null };
+      }
+  
+      const documents: Cult[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push(doc.data() as Cult);
+      });
+  
+      // Pega o último documento para a próxima paginação
+      const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1] as firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>;
+  
+      return { documents, lastVisible: lastDocument };
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
+    }
+  }
+  
 
   async findReceptionTeam(): Promise<ReceptionTeam[]> {
     try {
@@ -341,4 +380,9 @@ type ReceptionTeam = {
   id: string;
   name: string;
   lead: string;
+}
+
+interface PaginatedCult {
+  documents: Cult[];
+  lastVisible: firebase.firestore.DocumentSnapshot | null;
 }
