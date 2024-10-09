@@ -49,31 +49,31 @@ export const NavigationItems: NavigationItem[] = [
             id: 'cults-dashboard',
             title: 'Cultos',
             type: 'item',
-            url: 'cult-control/dashboard'
+            url: '/cult-control/dashboard'
           },
           {
             id: 'visit-dashboard',
             title: 'Visitas',
             type: 'item',
-            url: 'cult-control/visitor-list'
+            url: '/cult-control/visitor-list'
           },
           {
             id: 'new-cult',
             title: 'Novo Culto',
             type: 'item',
-            url: 'cult-control/new'
+            url: '/cult-control/new'
           },
           {
             id: 'new-visitor',
             title: 'Novo Visitante',
             type: 'item',
-            url: 'cult-control/visitor'
+            url: '/cult-control/visitor'
           },
           {
             id: 'new-recep-team',
             title: 'Nova Equipe de Recepcão',
             type: 'item',
-            url: 'cult-control/reception-team'
+            url: '/cult-control/reception-team'
           }
         ]
   },

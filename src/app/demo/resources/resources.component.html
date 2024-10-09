@@ -1,0 +1,92 @@
+<div class="col-xl-12" class="auth-wrapper">
+    <app-card cardTitle="Recursos Visuais Presbiteriana Palmas Norte" [options]="false" blockClass="table-border-style">
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewSpecsUrl" class="file-preview">
+                    <img [src]="filePreviewSpecsUrl" alt="File Preview" *ngIf="isImageFileSpecs()" />
+                    <p *ngIf="!isImageFileSpecs()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Arquivo Especificações SVG</p>
+                  </div>
+
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileSpecs()">Baixar Arquivo</button>
+            </div>
+        
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewColorSimplesUrl" class="file-preview">
+                    <img [src]="filePreviewColorSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleColor()" />
+                    <p *ngIf="!isImageFileSimpleColor()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida PNG</p>
+                  </div>
+
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileColorSimple()">Baixar Arquivo</button>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewPBSimplesUrl" class="file-preview">
+                    <img [src]="filePreviewPBSimplesUrl" alt="File Preview" *ngIf="isImageFileSimplePB()" />
+                    <p *ngIf="!isImageFileSimplePB()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca P&B PNG</p>
+                  </div>
+
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFilePBSimple()">Baixar Arquivo</button>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewOfficeSimplesUrl" class="file-preview">
+                    <img [src]="filePreviewOfficeSimplesUrl" alt="File Preview" *ngIf="isImageFileSimpleOffice()" />
+                    <p *ngIf="!isImageFileSimpleOffice()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida Para fundo branco PNG</p>
+
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileOfficeSimple()">Baixar Arquivo</button>
+            </div>
+        
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewSimplesWithoutLetterUrl" class="file-preview">
+                    <img [src]="filePreviewSimplesWithoutLetterUrl" alt="File Preview" *ngIf="isImageFileWithoutLetter()" />
+                    <p *ngIf="!isImageFileWithoutLetter()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logo Colorida PNG</p>
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetter()">Baixar Arquivo</button>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewSimplesWithoutLetterPBUrl" class="file-preview">
+                    <img [src]="filePreviewSimplesWithoutLetterPBUrl" alt="File Preview" *ngIf="isImageFileWithoutLetterPB()" />
+                    <p *ngIf="!isImageFileWithoutLetterPB()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logo P&B PNG</p>
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileWithoutLetterPb()">Baixar Arquivo</button>
+                
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+                <div *ngIf="filePreviewUphLogoUrl" class="file-preview">
+                    <img [src]="filePreviewUphLogoUrl" alt="File Preview" *ngIf="isImageFileUphLogo()" />
+                    <p *ngIf="!isImageFileUphLogo()">Preview não disponível para este tipo de arquivo</p>
+                    <p>Logomarca Colorida Para fundo branco PNG</p>
+
+                  </div>
+                
+                  <button class="btn btn-block btn-primary mb-4" (click)="downloadFileLogoUph()">Baixar Arquivo</button>
+            </div>
+          </div>
+        
+
+          <div>
+            <div><a title="ide ippn resources" href="https://ideippn.vercel.app/resources/"><img src="https://contador-gratis.com/contadores-de-visitas/190924045957987.gif" alt="ideippn"></a></div></div>
+    </app-card>
+  </div>
+
+  <div>
+  </div>
+  
