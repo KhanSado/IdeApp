@@ -1,0 +1,42 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Selecione qual turma deseja ver as aulas" [options]="false" blockClass="table-border-style">
+          <form [formGroup]="searchClassForm">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <select id="inputClass" class="form-control" formControlName="class">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let class of classList" value="{{ class.id }}">{{ class.name }}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2">
+                <button (click)="searchClassroomByClass()" class="btn btn-primary">Buscar</button>
+              </div>
+            </div>
+          </form>
+
+
+
+      <div class="table-responsive">
+        <p> {{message}} </p>
+        <table class="table table-styling">
+          <thead>
+            <tr class="table-primary">
+              <th>Data</th>
+              <th>Quantidade de Presentes</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cr of classroomList">
+              <td>{{ cr.data }}</td>
+              <td>{{ cr.qtdPresentes }}</td>
+              <td>
+                <button class="btn btn-light-primary" (click)="showDetails(cr.id)"> Detalhes </button> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  

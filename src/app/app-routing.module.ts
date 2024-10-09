@@ -76,6 +76,36 @@ const routes: Routes = [
         path: 'route-not-authorized',
         loadComponent: () => import('./demo/not-authorized/not-authorized.component').then(m => m.NotAuthorizedComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-professor',
+        loadComponent: () => import('./demo/ebd-control/new-professor/new-professor.component').then(m => m.NewProfessorComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-class',
+        loadComponent: () => import('./demo/ebd-control/new-class/new-class.component').then(m => m.NewClassComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-classroom',
+        loadComponent: () => import('./demo/ebd-control/new-classroom/new-classroom.component').then(m => m.NewClassroomComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/classroom-dashboard',
+        loadComponent: () => import('./demo/ebd-control/classroom-dashboard/classroom-dashboard.component').then(m => m.ClassroomDashboardComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/new-student',
+        loadComponent: () => import('./demo/ebd-control/new-student/new-student.component').then(m => m.NewStudentComponent),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'ebd-control/classroom-details/:id',
+        loadComponent: () => import('./demo/ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },

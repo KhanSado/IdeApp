@@ -1,0 +1,25 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Novo aluno" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newStudentForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputName">Nome do Aluno</label>
+            <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Nome do Aluno" />
+          </div>
+        </div>
+      
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="inputClass">Turma</label>
+                <select id="inputClass" class="form-control" formControlName="class">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
+                </select>
+              </div>
+          </div>
+
+        <button (click)="registerStudent()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  

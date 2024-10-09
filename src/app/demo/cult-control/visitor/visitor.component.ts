@@ -34,7 +34,7 @@ import { SharedModule } from 'src/app/theme/shared/shared.module';
 })
 export class VisitorComponent implements OnInit {
 
-  searchVisitorForm!: FormGroup; // Reactive form with validation
+  searchVisitorForm!: FormGroup;
   visitorList: Visitor[] = [];
   cultList: Cult[] = [];
 

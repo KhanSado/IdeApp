@@ -1,0 +1,28 @@
+<div class="row-xl-12">
+    <app-card cardTitle="Estatísticas da Aula" [options]="false" blockClass="table-border-style">
+      <div class="row">
+        @for (card of cards; track card) {
+          <div class="col-md-6 col-xl-3">
+            <app-card [hidHeader]="true" cardClass="{{ card.background }} order-card">
+              <h6 class="text-white">{{ card.title }}</h6>
+              <h2 class="text-end text-white"
+                ><i class="feather {{ card.icon }} float-start"></i><span>{{ card.number }}</span>
+              </h2>
+              <p class="m-b-0"
+                >{{ card.text }}<span class="float-end">{{ card.no }}</span></p
+              >
+            </app-card>
+          </div>
+        }
+      </div>
+    </app-card>
+  </div>
+  
+  <div class="row-xl-12">
+    <app-card cardTitle="Detalhes da Aula" [options]="false" blockClass="table-border-style">
+      <div class="row">
+        <h1 class="display-3 text-success mb-1">{{classroom?.data}}</h1>
+      </div>
+    </app-card>
+  </div>
+  

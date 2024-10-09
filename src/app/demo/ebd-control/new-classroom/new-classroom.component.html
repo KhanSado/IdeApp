@@ -1,0 +1,59 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Nova Aula" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newClassroomForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputData">Data</label>
+            <input type="date" class="form-control" formControlName="data" id="inputData" placeholder="Data da aula" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputOffer">Ofertas</label>
+            <input type="number" class="form-control" formControlName="offer" id="inputOffer" placeholder="Ofertas" />
+          </div>
+        </div>
+      
+        <div class="row">
+            <div class="form-group col-md-10">
+                <select id="inputClass" class="form-control" formControlName="class">
+                  <option selected>Selecione</option>
+                  <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2">
+                <button (click)="searchStudentByClass()" class="btn btn-primary">Buscar</button>
+              </div>
+          </div>
+      </form>
+
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+            <tr class="table-primary">
+              <th>Nome</th>
+              <th>Presença</th>
+              <th>Biblia</th>
+              <th>Revista/Livro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of studentList">
+              <td>{{ student.name }}</td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.present"/>
+              </td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.bible"/>
+              </td>
+              <td>
+                <input type="checkbox" [(ngModel)]="student.material"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button (click)="registerClassroom()" class="btn btn-primary">Cadastrar</button>
+    </app-card>
+  </div>
