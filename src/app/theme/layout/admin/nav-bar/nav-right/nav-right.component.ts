@@ -9,6 +9,7 @@ import { SignInService } from 'src/app/pages/authentication/service/sign-in.serv
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { SignUp } from 'src/app/models/UserSignUp';
 
 @Component({
   selector: 'app-nav-right',
@@ -80,12 +81,4 @@ export class NavRightComponent implements OnInit{
       return null;
     }
   }
-}
-
-type SignUp = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  userId: string
 }

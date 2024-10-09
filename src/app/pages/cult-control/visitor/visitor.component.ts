@@ -1,29 +1,11 @@
-type Cult = {
-  id: string;
-  data: Date;
-  tema: string;
-  pregador: string;
-  qtdAdultos: number;
-  qtdCriancasAdolescentes: number;
-  qtdVisitas: number,
-  reception: string
-}
-
-
-type Visitor = {
-  id: string;
-  name: string;
-  recievVisit: String;
-  phone: string;
-  visitedCult: string
-}
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CultControlService } from '../service/cult-control.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { Cult } from 'src/app/models/Cult';
+import { Visitor } from 'src/app/models/Visitor';
 
 @Component({
   selector: 'app-visitor',

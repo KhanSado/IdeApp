@@ -2,6 +2,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { Class } from 'src/app/models/Class';
+import { Classroom } from 'src/app/models/Classroom';
+import { Professor } from 'src/app/models/Professor';
+import { Student } from 'src/app/models/Student';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -444,33 +448,3 @@ export class EbdControlService implements OnInit {
   }
 }
 
-type Professor = {
-  id: string;
-  name: string
-}
-
-type Class = {
-  id: string;
-  name: string,
-  qtdStudents: number,
-  professor: string
-}
-
-type Classroom = {
-  id: string;
-  data: Date,
-  class: string,
-  qtdPresentes:number,
-  qtdBible: number,
-  qtdMaterials: number,
-  offer: number
-}
-
-type Student = {
-  id: string,
-  name: string,
-  class: string,
-  present: boolean,
-  bible: boolean,
-  material: boolean
-}

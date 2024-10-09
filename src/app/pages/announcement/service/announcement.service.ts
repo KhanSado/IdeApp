@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Announcement } from 'src/app/models/Announcement';
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +43,3 @@ export class AnnouncementService implements OnInit {
   // }
 }
 
-type Announcement = {
-  companyName: string;
-  companyPhone: string;
-  companyEmail: string;
-  area: string;
-}

@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { CultControlService } from '../service/cult-control.service';
+import { Cult } from 'src/app/models/Cult';
+import { Card } from 'src/app/models/Card';
 
 
 @Component({
@@ -70,24 +72,4 @@ export class CultDetailsComponent implements OnInit {
       console.error('Erro ao buscar documento:', error);
     }    
   }
-}
-
-type Cult = {
-  id: string;
-  data: Date;
-  tema: string;
-  pregador: string;
-  qtdAdultos: number;
-  qtdCriancasAdolescentes: number;
-  qtdVisitas: number,
-  reception: string
-}
-
-interface Card {
-  background: string;
-  title: string;
-  icon: string;
-  text: string;
-  number: string | number | undefined;
-  no: string;
 }

@@ -49,7 +49,8 @@ export default class SignUpComponent implements OnInit {
       name: "",
       email: this.email.value,
       password: this.password.value,
-      userId: ""
+      userId: "",
+      rule: "",
     }).subscribe((res: any) => {
       sessionStorage.setItem("token", res.user._delegate.accessToken)
       this.router.navigate(['/home']);
@@ -58,7 +59,8 @@ export default class SignUpComponent implements OnInit {
         name: this.username.value,
         email: this.email.value,
         password: "",
-        userId: res.user._delegate.uid
+        userId: res.user._delegate.uid,
+        rule: "",
       })
 
     }, (err: any) => {

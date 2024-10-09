@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
+import { Class } from 'src/app/models/Class';
+import { Student } from 'src/app/models/Student';
 
 @Component({
   selector: 'app-new-classroom',
@@ -103,19 +105,4 @@ export class NewClassroomComponent implements OnInit{
       console.error('Erro ao buscar documentos:', error);
     }
   }
-}
-
-type Class = {
-  id: string;
-  name: string,
-  professor: string
-}
-
-type Student = {
-  id: string,
-  name: string,
-  class: string,
-  present: boolean,
-  bible: boolean,
-  material: boolean
 }

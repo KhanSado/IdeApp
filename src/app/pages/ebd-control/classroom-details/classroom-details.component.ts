@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
+import { Classroom } from 'src/app/models/Classroom';
+import { Card } from 'src/app/models/Card';
 
 @Component({
   selector: 'app-classroom-details',
@@ -61,23 +63,4 @@ export class ClassroomDetailsComponent implements OnInit {
       console.error('Erro ao buscar documento:', error);
     }    
   }
-}
-
-type Classroom = {
-  id: string;
-  data: Date,
-  class: string,
-  qtdPresentes:number,
-  qtdBible: number,
-  qtdMaterials: number,
-  offer: number
-}
-
-interface Card {
-  background: string;
-  title: string;
-  icon: string;
-  text: string;
-  number: string | number | undefined;
-  no: string;
 }

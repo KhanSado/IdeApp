@@ -4,6 +4,7 @@ import { CultControlService } from '../service/cult-control.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { ReceptionTeam } from 'src/app/models/ReceptionTeam';
 
 @Component({
   selector: 'app-new-cult',
@@ -87,10 +88,4 @@ export class NewCultComponent implements OnInit{
       console.error('Erro ao criar Culto: ', error);
     });
   }
-}
-
-type ReceptionTeam = {
-  id: string;
-  name: string;
-  lead: string;
 }

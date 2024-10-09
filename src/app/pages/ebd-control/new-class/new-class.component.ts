@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
+import { Professor } from 'src/app/models/Professor';
 
 @Component({
   selector: 'app-new-class',
@@ -60,9 +61,4 @@ export class NewClassComponent implements OnInit{
       console.error('Erro ao criar turma: ', error);
     });
   }
-}
-
-type Professor = {
-  id: string;
-  name: string
 }

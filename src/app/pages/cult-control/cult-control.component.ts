@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'; // Importa Firestore corretamente no modo compat
+import { Cult } from 'src/app/models/Cult';
 
 
 @Component({
@@ -67,15 +68,4 @@ export class CultControlComponent implements OnInit{
       console.error('Erro ao buscar documento:', error);
     }    
   }
-}
-
-type Cult = {
-  id: string;
-  data: Date;
-  tema: string;
-  pregador: string;
-  qtdAdultos: number;
-  qtdCriancasAdolescentes: number;
-  qtdVisitas: number,
-  reception: string
 }

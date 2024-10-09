@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
+import { Class } from 'src/app/models/Class';
+import { Classroom } from 'src/app/models/Classroom';
 
 @Component({
   selector: 'app-classroom-dashboard',
@@ -82,17 +84,4 @@ export class ClassroomDashboardComponent implements OnInit {
       console.error('Erro ao buscar documento:', error);
     }    
   }
-}
-
-type Classroom = {
-  id: string;
-  data: Date,
-  class: string,
-  qtdPresentes:number
-}
-
-type Class = {
-  id: string;
-  name: string,
-  professor: string
 }

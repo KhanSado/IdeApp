@@ -2,6 +2,9 @@ import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
+import { Cult } from 'src/app/models/Cult';
+import { ReceptionTeam } from 'src/app/models/ReceptionTeam';
+import { Visitor } from 'src/app/models/Visitor';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -355,31 +358,6 @@ export class CultControlService implements OnInit {
       throw error;
     }
   }
-}
-
-type Cult = {
-  id: string;
-  data: Date;
-  tema: string;
-  pregador: string;
-  qtdAdultos: number;
-  qtdCriancasAdolescentes: number;
-  qtdVisitas: number,
-  reception: string
-}
-
-type Visitor = {
-  id: string;
-  name: string;
-  phone: string;
-  recievVisit: String;
-  visitedCult: string
-}
-
-type ReceptionTeam = {
-  id: string;
-  name: string;
-  lead: string;
 }
 
 interface PaginatedCult {

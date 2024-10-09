@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { EbdControlService } from '../service/ebd-control.service';
+import { Class } from 'src/app/models/Class';
 
 @Component({
   selector: 'app-new-student',
@@ -65,10 +66,4 @@ export class NewStudentComponent implements OnInit{
       console.error('Erro ao criar aluno: ', error);
     });
   }
-}
-
-type Class = {
-  id: string;
-  name: string,
-  professor: string
 }

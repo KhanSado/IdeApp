@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Observable, from, of } from 'rxjs';
+import { SignIn } from 'src/app/models/UserSignIn';
+import { SignUp } from 'src/app/models/UserSignUp';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -67,7 +69,8 @@ export class SignInService{
     this.firestore.collection('users').add({
      name: params.name,
      email: params.email,
-     userId: params.userId
+     userId: params.userId,
+     role: "",
    }).then(userRef => {
     const userId = userRef.id;
     this.firestore.doc(`users/${userId}`).update ({
@@ -103,17 +106,4 @@ export class SignInService{
   }
 }
  
-}
-
-type SignIn = {
-  email: string;
-  password: string;
-}
-
-type SignUp = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  userId: string
 }

@@ -4,6 +4,7 @@ import { CultControlService } from '../service/cult-control.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { Cult } from 'src/app/models/Cult';
 
 @Component({
   selector: 'app-new-cult-visit',
@@ -79,16 +80,4 @@ export class NewCultVisitComponent implements OnInit{
       'Não'
   ];
   }
-}
-
-
-type Cult = {
-  id: string;
-  data: Date;
-  tema: string;
-  pregador: string;
-  qtdAdultos: number;
-  qtdCriancasAdolescentes: number;
-  qtdVisitas: number,
-  reception: string
 }
