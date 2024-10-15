@@ -113,7 +113,27 @@ const routes: Routes = [
         loadComponent: () => import('./pages/ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
-      }
+      },
+
+
+      {
+        path: 'minutes/uph/new',
+        loadComponent: () => import('./pages/minutes/minutes-uph/minutes-uph.component').then(m => m.MinutesUphComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph']}
+      },
+      {
+        path: 'minutes/uph/list',
+        loadComponent: () => import('./pages/minutes/list-minutes-uph/list-minutes-uph.component').then(m => m.ListMinutesUphComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph']}
+      },
+      {
+        path: 'minute/uph/minute-details/:id',
+        loadComponent: () => import('./pages/minutes/minute-uph-details/minute-uph-details.component').then(m => m.MinuteUphDetailsComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph']}
+      },
     ]
   },
   {

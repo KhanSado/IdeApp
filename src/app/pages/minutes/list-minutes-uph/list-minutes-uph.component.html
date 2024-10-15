@@ -1,0 +1,28 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Atas" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+            <tr class="table-primary">
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let minute of minutes">
+              <td>{{ minute.data }}</td>
+              <td>
+                <button class="btn btn-light-primary" (click)="showDetails(minute.id)"> Detalhes </button> 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div *ngIf="hasMoreCults">
+        <button class="btn btn-light-primary" (click)="loadMoreMinutes(5)"> Mais </button> 
+      </div>
+  
+    </app-card>
+  </div>
+  

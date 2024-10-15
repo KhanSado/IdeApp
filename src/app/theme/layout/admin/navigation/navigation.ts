@@ -115,6 +115,27 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
 },
+
+{
+  id: 'uph-minutes',
+  title: 'Atas UPH',
+  type: 'collapse',
+  icon: 'feather icon-book',
+  children: [
+    {
+      id: 'uph-minute',
+      title: 'Registrar Ata',
+      type: 'item',
+      url: 'minutes/uph/new'
+    },
+    {
+      id: 'uph-minute',
+      title: 'Atas',
+      type: 'item',
+      url: 'minutes/uph/list'
+    }
+  ]
+},
     ]
   },
 ];

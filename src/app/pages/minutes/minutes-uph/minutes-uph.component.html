@@ -1,0 +1,41 @@
+<div class="col-xl-12">
+    <app-card cardTitle="Nova Ata" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newMinuteForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputData">Data da reunião</label>
+            <input type="date" class="form-control" formControlName="data" id="inputData" placeholder="Data da reunião" />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputData">Hora de início da reunião</label>
+            <input type="time" class="form-control" formControlName="hour" id="inputData" placeholder="Data da reunião" />
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputPregador">Quem está presidindo a reunião</label>
+            <input type="text" class="form-control" formControlName="president" id="inputPregador" placeholder="Presidente" />
+          </div>
+        </div>
+      
+        <div class="row">
+            <div class="form-group col-md-12">
+              <label for="inputPregador">Local da reunião</label>
+              <input type="text" class="form-control" formControlName="local" id="inputPregador" placeholder="Local" />
+            </div>
+          </div>
+ 
+      
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputQtdAdultos">Conteúdo da Ata</label>
+            <textarea class="form-control" id="content" name="ata" rows="15" cols="33" formControlName="content" placeholder="Conteúdo da sua reunião"></textarea>
+          </div>
+        </div>
+        <button (click)="registerUphMinute()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  
