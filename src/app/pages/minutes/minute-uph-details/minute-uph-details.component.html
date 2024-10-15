@@ -1,6 +1,6 @@
  <div class="row-xl-12">
     <app-card cardTitle="Detalhes do Culto" [options]="false" blockClass="table-border-style">
-      <div class="row">
+      <div class="row" id="pdfContent">
         <p>Ata número {{minute?.ataNumber}} da reunião da União Presbiteriana de Homens,
              reunido no dia {{minute?.data}} no {{minute?.local}}. 
              A reunião foi presidida pelo {{minute?.president}}, Presidente desta União Presbiteriana de Homens.
@@ -13,6 +13,10 @@
             Secretário da União Presbiteriana de Homens da Igreja Presbiteriana Palmas Norte, a tudo presente, 
             lavrei e assino a presente</p>
       </div>
+
+
+      <button class="btn btn-light-primary" (click)="generatePDF()">Baixar PDF</button>
+
     </app-card>
   </div>
   

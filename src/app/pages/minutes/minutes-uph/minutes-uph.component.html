@@ -38,7 +38,13 @@
               <input type="text" class="form-control" formControlName="local" id="inputPregador" placeholder="Local" />
             </div>
           </div>
-
+      
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputQtdAdultos">Conteúdo da Ata</label>
+            <textarea class="form-control" id="content" name="ata" rows="15" cols="33" formControlName="content" placeholder="Conteúdo da sua reunião"></textarea>
+          </div>
+        </div>
 
         <div class="row">
           <div class="form-group col-md-6">
@@ -51,14 +57,7 @@
             <input type="time" class="form-control" formControlName="finishHour" id="inputData" placeholder="Hora fa finalização da reunião" />
           </div>
         </div>
- 
-      
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="inputQtdAdultos">Conteúdo da Ata</label>
-            <textarea class="form-control" id="content" name="ata" rows="15" cols="33" formControlName="content" placeholder="Conteúdo da sua reunião"></textarea>
-          </div>
-        </div>
+        
         <button (click)="registerUphMinute()" class="btn btn-primary">Cadastrar</button>
       </form>
     </app-card>
