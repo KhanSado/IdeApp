@@ -6,6 +6,10 @@ import { Card } from 'src/app/models/Card';
 import { Minute } from 'src/app/models/Minute';
 import { UphService } from '../services/uph.service';
 import jsPDF from 'jspdf';
+import Docxtemplater from 'docxtemplater';
+import PizZip from 'pizzip';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-minute-uph-details',
@@ -42,7 +46,7 @@ export class MinuteUphDetailsComponent implements OnInit {
   generatePDF() {
     const doc = new jsPDF();
     const content = document.getElementById('pdfContent')?.innerText;
-  
+
     if (content) {
       const pageWidth = doc.internal.pageSize.getWidth(); 
       const margin = 18; 
@@ -55,6 +59,34 @@ export class MinuteUphDetailsComponent implements OnInit {
       doc.save('Ata.pdf');
     } else {
       console.error('Elemento HTML não encontrado ou vazio');
+    }
+  }
+
+  async generateDocx() {
+    const content = document.getElementById('pdfContent')?.innerText;
+
+    try {
+      // Carregar o arquivo template .docx como ArrayBuffer
+      const response = await fetch('/assets/modelo.docx');
+      const arrayBuffer = await response.arrayBuffer();
+
+      // Carregar o arquivo no PizZip
+      const zip = new PizZip(arrayBuffer);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+
+      console.log(content);
+      
+      // Substitua o placeholder pelo conteúdo dinâmico
+      doc.setData({ content: content });
+
+      // Renderize o documento com o conteúdo dinâmico
+      doc.render();
+
+      // Gere o documento final como blob
+      const output = doc.getZip().generate({ type: 'blob' });
+      saveAs(output, 'ata.docx');
+    } catch (error) {
+      console.error("Error generating DOCX: ", error);
     }
   }
   
