@@ -1,5 +1,3 @@
-import { Time } from "@angular/common";
-
 export type Minute = {
     id: string;
     data: Date;
@@ -10,4 +8,5 @@ export type Minute = {
     ataNumber: Number;
     finishHour: String;
     secretary: String;
+    finishPray: String;
   }

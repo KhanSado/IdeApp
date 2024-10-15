@@ -23,7 +23,11 @@ export class MinutesUphComponent implements OnInit{
       hour: new FormControl('', [Validators.required]),
       president: new FormControl('', [Validators.required]),
       local: new FormControl('', [Validators.required]),
-      content: new FormControl('', [Validators.required])
+      content: new FormControl('', [Validators.required]),
+      ataNumber: new FormControl('', [Validators.required]),
+      finishHour: new FormControl('', [Validators.required]),
+      secretary: new FormControl('', [Validators.required]),
+      finishPray: new FormControl('', [Validators.required])
     })
   }
 
@@ -39,8 +43,20 @@ export class MinutesUphComponent implements OnInit{
   get local() {
     return this.newMinuteForm.get('local')!
   }
+  get ataNumber() {
+    return this.newMinuteForm.get('ataNumber')!
+  }
+  get finishHour() {
+    return this.newMinuteForm.get('finishHour')!
+  }
+  get secretary() {
+    return this.newMinuteForm.get('secretary')!
+  }
   get content() {
     return this.newMinuteForm.get('content')!
+  }
+  get finishPray() {
+    return this.newMinuteForm.get('finishPray')!
   }
 
   registerUphMinute(){
@@ -51,15 +67,20 @@ export class MinutesUphComponent implements OnInit{
       president: this.president.value,
       local: this.local.value,
       content: this.content.value,
-      ataNumber: 0,
-      finishHour: "",
-      secretary: ""
+      ataNumber: this.ataNumber.value,
+      finishHour: this.finishHour.value,
+      secretary: this.secretary.value,
+      finishPray: this.finishPray.value
     }).then(() => {
       this.data.reset();
       this.hour.reset();
       this.president.reset();
       this.local.reset();
       this.content.reset();
+      this.ataNumber.reset();
+      this.finishHour.reset();
+      this.finishPray.reset();
+      this.secretary.reset();
     }).catch((error) => {
       console.error('Erro ao criar ata: ', error);
     });

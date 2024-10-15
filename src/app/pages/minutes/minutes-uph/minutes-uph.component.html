@@ -3,6 +3,18 @@
       <form [formGroup]="newMinuteForm" #formDir = "ngForm">
         <div class="row">
           <div class="form-group col-md-6">
+            <label for="inputData">Número da Ata</label>
+            <input type="number" class="form-control" formControlName="ataNumber" id="inputData" placeholder="Número da ata" />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputData">Secretário</label>
+            <input type="text" class="form-control" formControlName="secretary" id="inputData" placeholder="Quem está lavrando a ata" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
             <label for="inputData">Data da reunião</label>
             <input type="date" class="form-control" formControlName="data" id="inputData" placeholder="Data da reunião" />
           </div>
@@ -26,6 +38,19 @@
               <input type="text" class="form-control" formControlName="local" id="inputPregador" placeholder="Local" />
             </div>
           </div>
+
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputData">Oração Final</label>
+            <input type="text" class="form-control" formControlName="finishPray" id="inputData" placeholder="Oração Final" />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputData">Hora de fim da reunião</label>
+            <input type="time" class="form-control" formControlName="finishHour" id="inputData" placeholder="Hora fa finalização da reunião" />
+          </div>
+        </div>
  
       
         <div class="row">
