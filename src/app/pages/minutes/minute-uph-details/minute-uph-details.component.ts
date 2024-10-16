@@ -66,23 +66,18 @@ export class MinuteUphDetailsComponent implements OnInit {
     const content = document.getElementById('pdfContent')?.innerText;
 
     try {
-      // Carregar o arquivo template .docx como ArrayBuffer
       const response = await fetch('/assets/modelo.docx');
       const arrayBuffer = await response.arrayBuffer();
 
-      // Carregar o arquivo no PizZip
       const zip = new PizZip(arrayBuffer);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
 
       console.log(content);
       
-      // Substitua o placeholder pelo conteúdo dinâmico
       doc.setData({ content: content });
 
-      // Renderize o documento com o conteúdo dinâmico
       doc.render();
 
-      // Gere o documento final como blob
       const output = doc.getZip().generate({ type: 'blob' });
       saveAs(output, 'ata.docx');
     } catch (error) {
