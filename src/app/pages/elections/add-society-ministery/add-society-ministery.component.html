@@ -1,1 +1,14 @@
-<p>add-society-ministery works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Nova Sociedade ou Ministério" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newSocietyForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputNomeProfessor">Nome da Sociedade/Ministério</label>
+            <input type="text" class="form-control" formControlName="name" id="inputElegibleName" placeholder="Nome do membro" />
+          </div>
+        </div>
+        <button (click)="registerSociety()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  

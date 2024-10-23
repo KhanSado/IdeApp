@@ -1,1 +1,14 @@
-<p>elegible works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Novo Membro Elegível" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newElegibleForm" #formDir = "ngForm">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="inputNomeProfessor">Nome do Membro legível</label>
+            <input type="text" class="form-control" formControlName="name" id="inputElegibleName" placeholder="Nome do membro" />
+          </div>
+        </div>
+        <button (click)="registerElegible()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  
