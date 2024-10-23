@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Class } from 'src/app/models/Class';
 import { Classroom } from 'src/app/models/Classroom';
+import { Election } from 'src/app/models/Election';
 import { Elegible } from 'src/app/models/Elegible';
 import { Professor } from 'src/app/models/Professor';
 import { Society } from 'src/app/models/Society';
@@ -37,6 +38,13 @@ export class ElectionService implements OnInit {
       console.error('Error fetching user document:', error);
       throw new Error('Erro ao recuperar o documento do usuário');
     }
+  }
+
+  addCandidatesToElections(docId: string, array: string[]) {
+    const collectionRef = this.firestore.collection('election');
+    const docRef = collectionRef.doc(docId);
+
+    return docRef.set({ elegibles: array }, { merge: true });
   }
 
   async createElegible(params: Elegible): Promise<void> {
@@ -136,6 +144,85 @@ export class ElectionService implements OnInit {
         title: "Oops...",
         text: "Ocorreu um erro ao cadastrar o Sociedade ou Ministerio"
       });
+    }
+  }
+
+  async createNewElection(params: Election, elegibles: string[]): Promise<void> {
+    try {
+      const userId = await this.getCurrentUserId();
+      if (!userId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuário não está autenticado."
+        });
+        throw new Error('Usuário não autenticado');
+      }
+  
+      const userDocId = await this.getUserDocumentId(userId);
+  
+      if ((params.society.toString().length > 0)) {
+
+        const electionRef = await this.firestore.collection('election').add({
+          society: params.society,
+          userId: userId,
+          userDocId: userDocId 
+        });
+  
+        await this.firestore.doc(`election/${electionRef.id}`).update({ id: electionRef.id });
+  
+
+        await this.addCandidatesToElections(electionRef.id, elegibles )
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Nova Eleição",
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Por favor, preencha todos os campos."
+        });
+        throw new Error('Invalid input');
+      }
+    } catch (error) {
+      console.error('Error creating Nova Eleição:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocorreu um erro ao cadastrar o Nova Eleição"
+      });
+    }
+  }
+
+  async findSociety(): Promise<Society[]> {
+    try {
+      const collectionRef = this.firestore.collection('society');
+      const querySnapshot = await collectionRef.get().toPromise();
+
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return [];
+      }
+
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return [];
+      }
+
+      const documents: Society[] = [];
+      querySnapshot.forEach(doc => {        
+        documents.push(doc.data() as Society);
+      });
+      
+      return documents;
+    } catch (error) {
+      console.error('Erro ao buscar documentos:', error);
+      throw error;
     }
   }
 }

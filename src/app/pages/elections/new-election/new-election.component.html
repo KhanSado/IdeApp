@@ -1,1 +1,25 @@
-<p>new-election works!</p>
+<div class="col-xl-12">
+    <app-card cardTitle="Nova Eleição" [options]="false" blockClass="table-border-style">
+      <form [formGroup]="newElectionForm" #formDir = "ngForm">
+        <div class="row">
+
+        
+          <div class="form-group col-md-12">
+             <label for="inputElegibles">Elegíveis (separe por vírgulas)</label>
+             <input type="text" class="form-control" formControlName="elegibles" id="inputElegibles" placeholder="Insira os nomes separados por vírgulas" />
+          </div>
+
+          <div class="form-group col-md-16">
+            <label for="inputSociety">Sociedade/Ministerio</label>
+            <select id="inputSociety" class="form-control" formControlName="society">
+              <option selected>Selecione</option>
+              <option *ngFor="let society of societyList" value="{{society.id}}">{{ society.name }}</option>
+            </select>
+          </div>
+
+        </div>
+        <button (click)="registerElection()" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </app-card>
+  </div>
+  
