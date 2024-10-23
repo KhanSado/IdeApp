@@ -113,6 +113,20 @@ const routes: Routes = [
         loadComponent: () => import('./pages/ebd-control/classroom-details/classroom-details.component').then(m => m.ClassroomDetailsComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','ebd']}
+      },
+
+
+      {
+        path: 'elections/elegible',
+        loadComponent: () => import('./pages/elections/elegible/elegible.component').then(m => m.ElegibleComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph', 'saf', 'upa', 'ucp', 'ump']}
+      },
+      {
+        path: 'elections/new',
+        loadComponent: () => import('./pages/elections/new-election/new-election.component').then(m => m.NewElectionComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph', 'saf', 'upa', 'ucp', 'ump']}
       }
     ]
   },
@@ -135,6 +149,10 @@ const routes: Routes = [
       {
         path: 'resources',
         loadComponent: () => import('./public-pages/resources/resources.component').then(m => m.ResourcesComponent)
+      },
+      {
+        path: 'elections/vote',
+        loadComponent: () => import('./public-pages/elections/vote/vote.component').then(m => m.VoteComponent)
       }
     ]
   }

@@ -87,13 +87,13 @@ export const NavigationItems: NavigationItem[] = [
         id: 'classroom-dashboard',
         title: 'Aulas Registradas',
         type: 'item',
-        url: 'ebd-control/classroom-dashboard'
+        url: '/ebd-control/classroom-dashboard'
       },
       {
         id: 'new-professor',
         title: 'Novo Professor',
         type: 'item',
-        url: 'ebd-control/new-professor'
+        url: '/ebd-control/new-professor'
       },
       {
         id: 'new-class',
@@ -105,15 +105,35 @@ export const NavigationItems: NavigationItem[] = [
         id: 'new-classroom',
         title: 'Nova Aula',
         type: 'item',
-        url: 'ebd-control/new-classroom'
+        url: '/ebd-control/new-classroom'
       },
       {
         id: 'new-student',
         title: 'Novo Aluno',
         type: 'item',
-        url: 'ebd-control/new-student'
+        url: '/ebd-control/new-student'
       }
     ]
+},
+{
+  id: 'elections',
+  title: 'Eleições',
+  type: 'collapse',
+  icon: 'feather icon-check-square',
+  children: [
+    {
+      id: 'new-lelection',
+      title: 'Nova Eleição',
+      type: 'item',
+      url: '/elections/new'
+    },
+    {
+      id: 'new-elegible-member',
+      title: 'Novo Membro Elegível',
+      type: 'item',
+      url: '/elections/elegible'
+    }
+  ]
 },
     ]
   },
