@@ -127,6 +127,12 @@ const routes: Routes = [
         loadComponent: () => import('./pages/elections/new-election/new-election.component').then(m => m.NewElectionComponent),
         canActivate: [AuthGuard, RoleGuard],
         data: { roles: ['admin','uph', 'saf', 'upa', 'ucp', 'ump']}
+      },
+      {
+        path: 'elections/add-society-ministery',
+        loadComponent: () => import('./pages/elections/add-society-ministery/add-society-ministery.component').then(m => m.AddSocietyMinisteryComponent),
+        canActivate: [AuthGuard, RoleGuard],
+        data: { roles: ['admin','uph', 'saf', 'upa', 'ucp', 'ump']}
       }
     ]
   },

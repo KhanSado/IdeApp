@@ -132,6 +132,12 @@ export const NavigationItems: NavigationItem[] = [
       title: 'Novo Membro Elegível',
       type: 'item',
       url: '/elections/elegible'
+    },
+    {
+      id: 'add-society-ministery',
+      title: 'Novo Sociedade/ministério',
+      type: 'item',
+      url: '/elections/add-society-ministery'
     }
   ]
 },
