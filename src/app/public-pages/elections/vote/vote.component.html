@@ -1,1 +1,22 @@
-<p>vote works!</p>
+<form [formGroup]="societyForm">
+    <div class="form-group col-md-12">
+      <label for="inputSociety">Sociedade/Ministério</label>
+      <select id="inputSociety" class="form-control" formControlName="society" (change)="showElegibles()">
+        <option value="" disabled selected>Selecione</option>
+        <option *ngFor="let society of societyList" [value]="society.id">{{ society.name }}</option>
+      </select>
+    </div>
+  </form>
+  
+  <div *ngIf="elegibles && elegibles.length > 0">
+    <h3>Lista de Candidatos</h3>
+    <ul>
+      <li *ngFor="let elegible of elegibles">
+        {{ elegible }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="elegibles && elegibles.length === 0">
+    <p>Nenhum candidato encontrado.</p>
+  </div>
+  

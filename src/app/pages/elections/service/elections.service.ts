@@ -225,5 +225,34 @@ export class ElectionService implements OnInit {
       throw error;
     }
   }
+
+
+
+
+
+
+
+  //public 
+
+  getElectionsBySociety(societyId: string): Promise<any[]> {
+    return this.firestore.collection('election', ref => ref.where('society', '==', societyId))
+      .get().toPromise()
+      .then(snapshot => {
+        if (!snapshot || snapshot.empty) {
+          throw new Error('Nenhuma eleição encontrada para essa sociedade.');
+        }
+  
+        // Mapeia todos os documentos encontrados para seus dados
+        return snapshot.docs.map(doc => doc.data());
+      })
+      .catch(error => {
+        console.error('Erro ao buscar eleições:', error);
+        throw error;
+      });
+  }
+  
+  
+  
+  
 }
 
