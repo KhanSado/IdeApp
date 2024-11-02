@@ -135,6 +135,14 @@ const routes: Routes = [
       {
         path: 'resources',
         loadComponent: () => import('./public-pages/resources/resources.component').then(m => m.ResourcesComponent)
+      },
+      {
+        path: 'elections/saf',
+        loadComponent: () => import('./public-pages/elections/saf/saf.component').then(m => m.SafComponent)
+      },
+      {
+        path: 'elections/uph',
+        loadComponent: () => import('./public-pages/elections/uph/uph.component').then(m => m.UphComponent)
       }
     ]
   }
