@@ -7,7 +7,7 @@ export type Minute = {
     presents: String;
     ausents: String;
     content: String;
-    ataNumber: Number;
+    ataNumber: number;
     finishHour: String;
     secretary: String;
     finishPray: String;

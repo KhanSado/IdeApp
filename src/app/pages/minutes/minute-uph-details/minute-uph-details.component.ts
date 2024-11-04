@@ -39,7 +39,7 @@ export class MinuteUphDetailsComponent implements OnInit {
     try {
       const minute = await this.service.findMinuteById(id);
       this.minute = minute;
-      if (this.minute && this.minute.data) { // Supondo que a data venha em `minute.date`
+      if (this.minute && this.minute.data) {
         this.formattedDate = this.datePipe.transform(this.minute.data, 'dd \'de\' MMMM \'de\' yyyy', 'pt-BR');
       }
       console.log(this.minute);
@@ -68,11 +68,16 @@ export class MinuteUphDetailsComponent implements OnInit {
     }
   }
 
-  async generateDocx() {
+  async generateDocx(ataNumber: string | number| undefined) {
     const content = document.getElementById('pdfContent')?.innerText;
 
+    if (!ataNumber) {
+      console.error('Ata Number is undefined or null');
+      return;
+    }
+
     try {
-      const response = await fetch('/assets/modelo.docx');
+      const response = await fetch('/assets/modelouph.docx');
       const arrayBuffer = await response.arrayBuffer();
 
       const zip = new PizZip(arrayBuffer);
@@ -85,7 +90,7 @@ export class MinuteUphDetailsComponent implements OnInit {
       doc.render();
 
       const output = doc.getZip().generate({ type: 'blob' });
-      saveAs(output, 'ata.docx');
+    saveAs(output, `ata_${ataNumber}.docx`);
     } catch (error) {
       console.error("Error generating DOCX: ", error);
     }
