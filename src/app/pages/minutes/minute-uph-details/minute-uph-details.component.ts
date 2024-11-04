@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -16,15 +16,18 @@ import { saveAs } from 'file-saver';
   standalone: true,
   imports: [CommonModule, SharedModule, RouterModule],
   templateUrl: './minute-uph-details.component.html',
-  styleUrl: './minute-uph-details.component.scss'
+  styleUrl: './minute-uph-details.component.scss',
+  providers: [DatePipe]
 })
 export class MinuteUphDetailsComponent implements OnInit {
 
   id!: string;
   minute: Minute | undefined;
   cards: Card[] = [];
+  formattedDate: string | null = null; // Adicione esta linha
 
-  constructor(private route: ActivatedRoute, private service: UphService) {
+
+  constructor(private route: ActivatedRoute, private service: UphService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -36,6 +39,9 @@ export class MinuteUphDetailsComponent implements OnInit {
     try {
       const minute = await this.service.findMinuteById(id);
       this.minute = minute;
+      if (this.minute && this.minute.data) { // Supondo que a data venha em `minute.date`
+        this.formattedDate = this.datePipe.transform(this.minute.data, 'dd \'de\' MMMM \'de\' yyyy', 'pt-BR');
+      }
       console.log(this.minute);
     
     } catch (error) {

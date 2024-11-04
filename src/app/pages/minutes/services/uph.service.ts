@@ -60,6 +60,8 @@ export class UphService implements OnInit {
           local: params.local,
           president: params.president,
           content: params.content,
+          presents: params.presents,
+          ausents: params.ausents,
           ataNumber: params.ataNumber,
           finishHour: params.finishHour,
           secretary: params.secretary,

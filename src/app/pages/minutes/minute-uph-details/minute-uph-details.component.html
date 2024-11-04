@@ -2,9 +2,9 @@
     <app-card cardTitle="Ata de Número {{minute?.ataNumber}}" [options]="false" blockClass="table-border-style">
       <div class="row" id="pdfContent">
         <p>Ata número {{minute?.ataNumber}} da reunião da União Presbiteriana de Homens,
-             reunido no dia {{minute?.data}} no {{minute?.local}}. 
+             reunido no dia {{formattedDate}} no {{minute?.local}}. 
              A reunião foi presidida pelo {{minute?.president}}, Presidente desta União Presbiteriana de Homens.
-              Estavam presentes os membros, [ListaDePresentes]
+              Estavam presentes os membros, {{minute?.presents}} e ausentes os membros, {{minute?.ausents}}.
                A reunião teve início às {{minute?.hour}}</p>
         <p>{{minute?.content}}</p>
 

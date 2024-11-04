@@ -23,6 +23,8 @@ export class MinutesUphComponent implements OnInit{
       hour: new FormControl('', [Validators.required]),
       president: new FormControl('', [Validators.required]),
       local: new FormControl('', [Validators.required]),
+      presents: new FormControl('', [Validators.required]),
+      ausents: new FormControl('', [Validators.required]),
       content: new FormControl('', [Validators.required]),
       ataNumber: new FormControl('', [Validators.required]),
       finishHour: new FormControl('', [Validators.required]),
@@ -42,6 +44,12 @@ export class MinutesUphComponent implements OnInit{
   }
   get local() {
     return this.newMinuteForm.get('local')!
+  }
+  get presents() {
+    return this.newMinuteForm.get('presents')!
+  }
+  get ausents() {
+    return this.newMinuteForm.get('ausents')!
   }
   get ataNumber() {
     return this.newMinuteForm.get('ataNumber')!
@@ -66,6 +74,8 @@ export class MinutesUphComponent implements OnInit{
       hour: this.hour.value,
       president: this.president.value,
       local: this.local.value,
+      presents: this.presents.value,
+      ausents: this.ausents.value,
       content: this.content.value,
       ataNumber: this.ataNumber.value,
       finishHour: this.finishHour.value,
