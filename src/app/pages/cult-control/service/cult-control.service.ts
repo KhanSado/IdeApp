@@ -129,8 +129,9 @@ export class CultControlService implements OnInit {
           id: visitorId
         });
   
+
         await this.firestore.doc(`cult/${params.visitedCult}`).update({
-          qtdVisitas: firebase.firestore.FieldValue.increment(1)
+          qtdVisitas: firebase.firestore.FieldValue.increment(namesArray.length)
         });
   
         Swal.fire({
