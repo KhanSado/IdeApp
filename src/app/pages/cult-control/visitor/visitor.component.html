@@ -27,11 +27,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let visit of visitorList">
-              <td>{{ visit.name }}</td>
+              <td>
+                <ul class="no-bullets" *ngIf="isArray(visit.name)">
+                  <li *ngFor="let name of visit.name">{{ name }}</li>
+                </ul>
+                <span *ngIf="!isArray(visit.name)">
+                  {{ visit.name }}
+                </span>
+              </td>
               <td>{{ visit.recievVisit }}</td>
               <td>{{ visit.phone }}</td>
             </tr>
           </tbody>
+          
+          
         </table>
       </div>
     </app-card>

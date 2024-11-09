@@ -46,6 +46,11 @@ export class VisitorComponent implements OnInit {
     }
   }
 
+  isArray(value: any): boolean {
+    return Array.isArray(value);
+  }
+
+  
   async searchVisitorsByCult() {
     if (this.visitedCult.invalid) {
       console.error('Culto precisa ser selecionado');

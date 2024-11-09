@@ -95,7 +95,6 @@ export class CultControlService implements OnInit {
       });
     }
   }
-
   async createVisitor(params: Visitor): Promise<void> {
     try {
       const userId = await this.getCurrentUserId();
@@ -110,10 +109,13 @@ export class CultControlService implements OnInit {
   
       const userDocId = await this.getUserDocumentId(userId);
   
-      if (params.name.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0) {
+      // Converte `name` para um array, separando por vírgulas e removendo espaços extras
+      const namesArray = params.name.split(',').map(name => name.trim());
   
+      if (namesArray.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0) {
+        
         const visitorRef = await this.firestore.collection('visitor').add({
-          name: params.name,
+          name: namesArray,
           phone: params.phone,
           recievVisit: params.recievVisit,
           visitedCult: params.visitedCult,
@@ -157,6 +159,68 @@ export class CultControlService implements OnInit {
       });
     }
   }
+  
+  // async createVisitor(params: Visitor): Promise<void> {
+  //   try {
+  //     const userId = await this.getCurrentUserId();
+  //     if (!userId) {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Oops...",
+  //         text: "Usuário não está autenticado."
+  //       });
+  //       throw new Error('Usuário não autenticado');
+  //     }
+  
+  //     const userDocId = await this.getUserDocumentId(userId);
+  
+  //     if (params.name.length > 0 && params.phone.length > 0 && params.visitedCult.length > 0) {
+  
+  //       const visitorRef = await this.firestore.collection('visitor').add({
+  //         name: params.name,
+  //         phone: params.phone,
+  //         recievVisit: params.recievVisit,
+  //         visitedCult: params.visitedCult,
+  //         userId: userId,
+  //         userDocId: userDocId
+  //       });
+  
+  //       const visitorId = visitorRef.id;
+  
+  //       await this.firestore.doc(`visitor/${visitorId}`).update({
+  //         id: visitorId
+  //       });
+  
+  //       await this.firestore.doc(`cult/${params.visitedCult}`).update({
+  //         qtdVisitas: firebase.firestore.FieldValue.increment(1)
+  //       });
+  
+  //       Swal.fire({
+  //         position: "top-end",
+  //         icon: "success",
+  //         title: "Novo Visitante adicionado",
+  //         showConfirmButton: true,
+  //         confirmButtonText: "Ok",
+  //         timer: 1500
+  //       });
+  
+  //     } else {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Oops...",
+  //         text: "Por favor, preencha todos os campos."
+  //       });
+  //       throw new Error('Invalid input');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error creating visitor:', error);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Ocorreu um erro ao cadastrar novo visitante"
+  //     });
+  //   }
+  // }
 
   async createReceptionTeam(params: ReceptionTeam): Promise<void> {
     try {
