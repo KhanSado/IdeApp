@@ -16,7 +16,15 @@
             <td>{{ cult.data }}</td>
             <td>{{ cult.pregador }}</td>
             <td>
-              <button class="btn btn-light-primary" (click)="showDetails(cult.id)"> Detalhes </button> 
+              <button class="btn btn-light-primary custom-btn-spacing" (click)="showDetails(cult.id)">
+                <i class="fas fa-info-circle mr-2"></i> 
+              </button>
+              <button class="btn btn-light-warning custom-btn-spacing">
+                <i class="fas fa-edit mr-2"></i> 
+              </button>
+              <button class="btn btn-light-danger custom-btn-spacing" (click)="deleteCult(cult.id)">
+                <i class="fas fa-trash-alt mr-2"></i> 
+              </button>
             </td>
           </tr>
         </tbody>

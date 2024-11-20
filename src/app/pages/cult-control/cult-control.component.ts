@@ -68,4 +68,14 @@ export class CultControlComponent implements OnInit{
       console.error('Erro ao buscar documento:', error);
     }    
   }
+
+  deleteCult(docId: string) {
+    this.service.deleteCult(docId)
+      .then(() => {
+        console.log('Pos excluído com sucesso!');
+      })
+      .catch(error => {
+        console.error('Erro ao excluir documento: ', error);
+      });
+  }
 }

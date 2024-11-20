@@ -423,6 +423,40 @@ export class CultControlService implements OnInit {
       throw error;
     }
   }
+
+
+  async deleteCult(docId: string): Promise<void> {
+    try {
+      const result = await Swal.fire({
+        title: "Tem certeza?",
+        text: "Você não poderá reverter essa ação!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, excluir!"
+      });
+  
+      if (result.isConfirmed) {
+        await this.firestore.collection("cult").doc(docId).delete();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Culto excluído com sucesso",
+          showConfirmButton: true,
+          confirmButtonText: "Ok",
+          timer: 1500
+        });
+     }
+    } catch (error) {
+      console.error('Erro ao excluir o Culto:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocorreu um erro ao excluir o culto"
+      });
+    }
+  }
 }
 
 interface PaginatedCult {
