@@ -32,18 +32,11 @@ export const NavigationItems: NavigationItem[] = [
         url: '/home',
         icon: 'feather icon-home'
       },
-      // {
-      //   id: 'anuncio',
-      //   title: 'Anúnciar',
-      //   type: 'item',
-      //   url: '/announcement',
-      //   icon: 'feather icon-box'
-      // },
       {
         id: 'cult-control',
         title: 'Controle de Culto',
         type: 'collapse',
-        icon: 'feather icon-clipboard',
+        icon: 'feather icon-box',
         children: [
           {
             id: 'cults-dashboard',
@@ -79,7 +72,7 @@ export const NavigationItems: NavigationItem[] = [
   },
   {
     id: 'ebd-control',
-    title: 'Escola Bíblica Dominical',
+    title: 'Controle de E.B.D',
     type: 'collapse',
     icon: 'feather icon-book',
     children: [

@@ -1,4 +1,18 @@
 <div class="row-xl-12">
+  <app-card cardTitle="Detalhes do culto" [options]="false" blockClass="table-border-style">
+    <div class="row align-items-center text-center p-4">
+      <div class="col-12 mb-3">
+        <h1 class="display-4 text-primary fw-bold">{{ cult?.tema }}</h1>
+      </div>
+      <div class="col-12">
+        <h5 class="text-muted"><i class="feather icon-user me-2"></i>{{ cult?.pregador }}</h5>
+        <h5 class="text-muted"><i class="feather icon-calendar me-2"></i>{{ cult?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }}</h5>
+      </div>
+    </div>
+  </app-card>
+</div>
+
+<div class="row-xl-12">
     <app-card cardTitle="Estatísticas do Culto" [options]="false" blockClass="table-border-style">
       <div class="row">
         @for (card of cards; track card) {
@@ -17,19 +31,4 @@
       </div>
     </app-card>
   </div>
-  
-  <div class="row-xl-12">
-    <app-card cardTitle="Mais detalhes do culto" [options]="false" blockClass="table-border-style">
-      <div class="row align-items-center text-center p-4">
-        <div class="col-12 mb-3">
-          <h1 class="display-4 text-primary fw-bold">{{ cult?.tema }}</h1>
-        </div>
-        <div class="col-12">
-          <h5 class="text-muted"><i class="feather icon-user me-2"></i>{{ cult?.pregador }}</h5>
-          <h5 class="text-muted"><i class="feather icon-calendar me-2"></i>{{ cult?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }}</h5>
-        </div>
-      </div>
-    </app-card>
-  </div>
-  
   
