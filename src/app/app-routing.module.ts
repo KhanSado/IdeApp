@@ -129,25 +129,14 @@ const routes: Routes = [
         loadComponent: () => import('./pages/authentication/sign-in/sign-in.component')
       },
       {
-        path: 'profissionais',
-        loadComponent: () => import('./public-pages/public-announcements/public-announcements.component').then(m => m.PublicAnnouncementsComponent)
+        path: 'auth/forgot-password',
+        loadComponent: () => import('./pages/authentication/forgot-pass/forgot-pass.component').then(m => m.ForgotPassComponent)
       },
       {
         path: 'resources',
         loadComponent: () => import('./public-pages/resources/resources.component').then(m => m.ResourcesComponent)
       },
-      // {
-      //   path: 'elections/saf',
-      //   loadComponent: () => import('./public-pages/elections/saf/saf.component').then(m => m.SafComponent)
-      // },
-      // {
-      //   path: 'elections/uph',
-      //   loadComponent: () => import('./public-pages/elections/uph/uph.component').then(m => m.UphComponent)
-      // }
-      {
-        path: 'elections/upa',
-        loadComponent: () => import('./public-pages/elections/upa/upa.component').then(m => m.UpaComponent)
-      }
+  
     ]
   }
 ];

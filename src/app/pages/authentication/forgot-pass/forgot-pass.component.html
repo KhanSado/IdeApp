@@ -1,0 +1,23 @@
+<div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="card">
+        <div class="row align-items-center text-center">
+          <div class="col-md-12">
+            <div class="card-body"[formGroup]="recoveryPassForm" #formDir = "ngForm">
+              <img src="assets/images/g1.png" alt="logo" class="img-fluid mb-4"  style="height: 175px;"/>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="feather icon-mail"></i></span>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" />
+              </div>
+              <div class="d-grid">
+                <button class="btn btn-block btn-primary mb-4" (click)="recoveryPass()">Recuperar senha</button>
+              </div>
+              <p class="mb-2 text-muted"><a [routerLink]="['/auth/signin']" class="f-w-400 text-primary">Acessar minha Conta</a></p>
+              <p class="mb-0 text-muted">Não tem conta? <a [routerLink]="['/auth/signup']" class="f-w-400 text-primary">Cadastrar</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

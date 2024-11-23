@@ -27,7 +27,12 @@ export class SignInService{
    private getUserId(): Promise<string | null> {
     return this.auth.currentUser.then(user => user ? user.uid : null);
   }
-  signin(params: SignIn): Observable<any> {
+
+  resetPassword(email: string): Promise<void> {
+    return this.auth.sendPasswordResetEmail(email);
+  }
+
+    signin(params: SignIn): Observable<any> {
     return from(
       this.auth.signInWithEmailAndPassword(params.email, params.password)
         .then(userCredential => {
