@@ -1,5 +1,5 @@
 <div class="row-xl-12">
-    <app-card cardTitle="Estatísticas da Aula" [options]="false" blockClass="table-border-style">
+    <app-card cardTitle="Estatísticas da Aula de {{ classroom?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }}"  [options]="false" blockClass="table-border-style">
       <div class="row">
         @for (card of cards; track card) {
           <div class="col-md-6 col-xl-3">
@@ -17,12 +17,3 @@
       </div>
     </app-card>
   </div>
-  
-  <div class="row-xl-12">
-    <app-card cardTitle="Detalhes da Aula" [options]="false" blockClass="table-border-style">
-      <div class="row">
-        <h1 class="display-3 text-success mb-1">{{classroom?.data}}</h1>
-      </div>
-    </app-card>
-  </div>
-  

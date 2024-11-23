@@ -1,5 +1,5 @@
 <div class="col-xl-12">
-    <app-card cardTitle="Novo Culto" [options]="false" blockClass="table-border-style">
+    <app-card cardTitle="Registrar nova turma" [options]="false" blockClass="table-border-style">
       <form [formGroup]="newClassForm" #formDir = "ngForm">
         <div class="row">
           <div class="form-group col-md-12">
@@ -10,7 +10,7 @@
           <div class="form-group col-md-16">
             <label for="inputProfessor">Professor da Turma</label>
             <select id="inputProfessor" class="form-control" formControlName="professor">
-              <option selected>Selecione</option>
+              <option value="" disabled selected>Selecione uma turma</option>
               <option *ngFor="let professor of professorList" value="{{professor.id}}">{{ professor.name }}</option>
             </select>
           </div>

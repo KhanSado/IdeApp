@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -10,7 +10,7 @@ import { Classroom } from 'src/app/models/Classroom';
 @Component({
   selector: 'app-classroom-dashboard',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './classroom-dashboard.component.html',
   styleUrl: './classroom-dashboard.component.scss'
 })

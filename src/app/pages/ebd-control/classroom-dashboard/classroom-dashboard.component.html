@@ -4,7 +4,7 @@
             <div class="row">
               <div class="form-group col-md-10">
                 <select id="inputClass" class="form-control" formControlName="class">
-                  <option selected>Selecione</option>
+                  <option value="" disabled selected>Selecione uma turma</option>
                   <option *ngFor="let class of classList" value="{{ class.id }}">{{ class.name }}</option>
                 </select>
               </div>
@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let cr of classroomList">
-              <td>{{ cr.data }}</td>
+              <td>{{ cr?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td>
               <td>{{ cr.qtdPresentes }}</td>
               <td>
                 <button class="btn btn-light-primary" (click)="showDetails(cr.id)"> Detalhes </button> 

@@ -7,18 +7,11 @@
             <input type="date" class="form-control" formControlName="data" id="inputData" placeholder="Data da aula" />
           </div>
         </div>
-
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label for="inputOffer">Ofertas</label>
-            <input type="number" class="form-control" formControlName="offer" id="inputOffer" placeholder="Ofertas" />
-          </div>
-        </div>
       
         <div class="row">
             <div class="form-group col-md-10">
                 <select id="inputClass" class="form-control" formControlName="class">
-                  <option selected>Selecione</option>
+                  <option value="" disabled selected>Selecione uma turma</option>
                   <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
                 </select>
               </div>

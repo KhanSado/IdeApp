@@ -27,7 +27,6 @@ export class NewClassroomComponent implements OnInit{
     this.newClassroomForm = new FormGroup({
       data: new FormControl('', [Validators.required]),
       class: new FormControl('', [Validators.required]),
-      offer: new FormControl('', [Validators.required]),
       qtdPresentes: new FormControl('', [Validators.required])
     })
   }
@@ -39,9 +38,6 @@ export class NewClassroomComponent implements OnInit{
   }
   get qtdPresentes() {
     return this.newClassroomForm.get('qtdPresentes')!
-  }
-  get offer() {
-    return this.newClassroomForm.get('offer')!
   }
 
   async findClass() {
@@ -68,13 +64,11 @@ export class NewClassroomComponent implements OnInit{
       class: this.class.value,
       qtdPresentes: qtdPresentes,
       qtdBible: qtdBible,
-      qtdMaterials: qtdMaterial,
-      offer: this.offer.value
+      qtdMaterials: qtdMaterial
     }).then(() => {
       this.data.reset();
       this.class.reset();
       this.qtdPresentes.reset();
-      this.offer.reset();
       this.studentList.forEach(student => student.present = false);
       this.studentList.forEach(student => student.bible = false);
       this.studentList.forEach(student => student.material = false);

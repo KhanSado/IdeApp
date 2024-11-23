@@ -1,5 +1,5 @@
 <div class="col-xl-12">
-    <app-card cardTitle="Novo aluno" [options]="false" blockClass="table-border-style">
+    <app-card cardTitle="Registrar novo aluno" [options]="false" blockClass="table-border-style">
       <form [formGroup]="newStudentForm" #formDir = "ngForm">
         <div class="row">
           <div class="form-group col-md-12">
@@ -12,7 +12,7 @@
             <div class="form-group col-md-12">
                 <label for="inputClass">Turma</label>
                 <select id="inputClass" class="form-control" formControlName="class">
-                  <option selected>Selecione</option>
+                  <option value="" disabled selected>Selecione uma turma</option>
                   <option *ngFor="let class of ClassList" value="{{class.id}}">{{ class.name }}</option>
                 </select>
               </div>

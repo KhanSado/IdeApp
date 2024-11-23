@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -9,7 +9,7 @@ import { Card } from 'src/app/models/Card';
 @Component({
   selector: 'app-classroom-details',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './classroom-details.component.html',
   styleUrl: './classroom-details.component.scss'
 })

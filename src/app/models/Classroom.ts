@@ -4,6 +4,5 @@ export type Classroom = {
   class: string,
   qtdPresentes:number,
   qtdBible: number,
-  qtdMaterials: number,
-  offer: number
+  qtdMaterials: number
 }
