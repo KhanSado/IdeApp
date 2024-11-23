@@ -1,3 +1,18 @@
-<h1>VOCÊ NÃO POSSUI ACESSO A ESTA FUNCIONALIDADE</h1>
-
-<h4>acha que é um erro ? contato um administrador</h4>
+<div class="col-xl-12">
+    <app-card cardTitle="" [options]="false" blockClass="table-border-style">
+      <div class="text-center py-5">
+        <h1 class="display-1 text-danger">
+          <i class="feather icon-alert-triangle"></i>
+        </h1>
+        <h2 class="text-dark">Acesso Negado</h2>
+        <p class="text-muted">
+          Você não tem permissão para acessar esta página.
+        </p>
+        <p class="text-muted">
+          Se você acha que isso é um erro, entre em contato com o administrador.
+        </p>
+        <button class="btn btn-primary mt-3" (click)="goToHome()">Voltar para Login</button>
+      </div>
+    </app-card>
+  </div>
+  
