@@ -5,7 +5,7 @@
               <div class="form-group col-md-10">
                 <select id="inputVisitCult" class="form-control" formControlName="visitedCult">
                   <option selected>Selecione</option>
-                  <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult.data }} - {{ cult.tema }}</option>
+                  <option *ngFor="let cult of cultList" value="{{ cult.id }}">{{ cult?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }} - {{ cult.tema }}</option>
                 </select>
               </div>
               <div class="form-group col-md-2">

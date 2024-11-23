@@ -13,7 +13,7 @@
         <tbody>
           <tr *ngFor="let cult of cults">
             <td>{{ cult.tema }}</td>
-            <td>{{ cult.data }}</td>
+            <td>{{ cult?.data | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td>
             <td>{{ cult.pregador }}</td>
             <td>
               <button class="btn btn-light-primary custom-btn-spacing" (click)="showDetails(cult.id)">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CultControlService } from './service/cult-control.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import firebase from 'firebase/compat/app';
@@ -12,7 +12,7 @@ import { Cult } from 'src/app/models/Cult';
 @Component({
   selector: 'app-cult-control',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './cult-control.component.html',
   styleUrl: './cult-control.component.scss'
 })

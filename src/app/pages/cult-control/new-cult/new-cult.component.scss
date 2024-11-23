@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .responsive-label {
+      font-size: 0.75rem; /* Reduz o texto em telas pequenas */
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .responsive-label {
+      font-size: 1rem; /* Tamanho normal para telas maiores */
+    }
+  }
+  

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CultControlService } from '../service/cult-control.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { Cult } from 'src/app/models/Cult';
@@ -10,7 +10,7 @@ import { Visitor } from 'src/app/models/Visitor';
 @Component({
   selector: 'app-visitor',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './visitor.component.html',
   styleUrls: ['./visitor.component.scss']
 })

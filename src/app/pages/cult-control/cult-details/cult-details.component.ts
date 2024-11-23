@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -10,7 +10,7 @@ import { Card } from 'src/app/models/Card';
 @Component({
   selector: 'app-cult-details',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './cult-details.component.html',
   styleUrl: './cult-details.component.scss'
 })
@@ -25,10 +25,14 @@ export class CultDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') ?? '';
-    console.log('ID:', this.id);
     this.showDetails(this.id)
   }
 
+  trackByCard(index: number, card: Card): string {
+    return card.title; // ou outro identificador único
+  }
+
+  
   async showDetails(id: string) {
     try {
       const cult = await this.service.findCultById(id);
