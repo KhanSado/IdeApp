@@ -1,0 +1,127 @@
+.dashboard-box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.title {
+  font-size: 1.25rem; /* Tamanho do título reduzido */
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.cult-count .count {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #28a745; /* Verde para indicar sucesso */
+}
+
+.cult-count .subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.no-cults {
+  margin-top: 15px;
+}
+
+.no-cults p {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.container-fluid {
+  padding: 0 15px;
+}
+
+.app-card {
+  background-color: #f9f9f9; /* Cor de fundo suave */
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-border-style {
+  border: none;
+}
+
+.dashboard-box {
+  padding: 20px;
+}
+
+.cult-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.count-item {
+  text-align: center;
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 8px;
+  flex: 1; /* Garantir que todos os items tenham o mesmo tamanho */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 10px; /* Espaçamento entre os itens */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição suave */
+}
+
+.count-item:hover {
+  transform: translateY(-5px); /* Levanta o item ao passar o mouse */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Aumenta o efeito de sombra */
+}
+
+.count-item .icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #6c757d;
+}
+
+.count-item .count {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.count-item .subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Adicionando cores para diferenciação */
+.count-item:first-child {
+  background-color: #e3f2fd; /* Azul claro */
+}
+
+.count-item:nth-child(2) {
+  background-color: #f1f8e9; /* Verde claro */
+}
+
+.count-item:last-child {
+  background-color: #fff3e0; /* Laranja claro */
+}
+
+/* Responsividade: Ajuste para telas menores */
+@media (max-width: 768px) {
+  .cult-count {
+    flex-direction: column; /* Empilha os itens verticalmente em telas menores */
+    align-items: center;
+  }
+
+  .count-item {
+    margin-bottom: 20px; /* Adiciona espaçamento entre os itens empilhados */
+    width: 100%; /* Garante que os itens ocupem a largura completa */
+  }
+
+  .count-item:last-child {
+    margin-bottom: 0; /* Remove margem no último item */
+  }
+}
+

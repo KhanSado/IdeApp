@@ -1,8 +1,80 @@
 <div class="col-xl-12">
-    <app-card cardTitle="" [options]="false" blockClass="table-border-style">
+    <div class="row">
+      <!-- Cartão de Resumo de Cultos -->
+      <div class="col-md-6">
+        <app-card cardTitle="Resumo de Cultos" [options]="false" blockClass="table-border-style">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="dashboard-box">
+                  <h5 class="title">Cultos Registrados no Ano de {{ currentYear }}</h5>
+                  <div *ngIf="cultCount === 0" class="no-cults">
+                    <p class="text-muted">Nenhum culto registrado para o ano {{ currentYear }}.</p>
+                  </div>
+                  <div *ngIf="cultCount > 0" class="cult-count d-flex justify-content-between">
+                    <!-- Total de Cultos -->
+                    <div class="count-item d-flex flex-column align-items-center">
+                      <div class="icon mb-2">
+                        <i class="fas fa-church"></i> <!-- Ícone representando culto -->
+                      </div>
+                      <h4 class="count">{{ cultCount }}</h4>
+                      <p class="subtitle">Cultos Registrados</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
       
-
-
-    </app-card>
+      
+  
+      <!-- Cartão de Resumo de Presenças -->
+      <div class="col-md-6">
+        <app-card cardTitle="Resumo de Presenças" [options]="false" blockClass="table-border-style">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="dashboard-box">
+                  <h5 class="title">Total de Presenças no Ano de {{ currentYear }}</h5>
+                  <div *ngIf="totalAdultos === 0 && totalCriancasAdolescentes === 0 && totalVisitas === 0" class="no-cults">
+                    <p class="text-muted">Nenhuma presença registrada para o ano {{ currentYear }}.</p>
+                  </div>
+                  <div *ngIf="totalAdultos > 0 || totalCriancasAdolescentes > 0 || totalVisitas > 0" class="cult-count d-flex justify-content-between">
+                    <!-- Adultos -->
+                    <div class="count-item d-flex flex-column align-items-center">
+                      <div class="icon mb-2">
+                        <i class="fas fa-users"></i>
+                      </div>
+                      <h4 class="count">{{ totalAdultos }}</h4>
+                      <p class="subtitle">Adultos</p>
+                    </div>
+                    <!-- Crianças e Adolescentes -->
+                    <div class="count-item d-flex flex-column align-items-center">
+                      <div class="icon mb-2">
+                        <i class="fas fa-child"></i>
+                      </div>
+                      <h4 class="count">{{ totalCriancasAdolescentes }}</h4>
+                      <p class="subtitle">Crianças e Adolescentes</p>
+                    </div>
+                    <!-- Visitas -->
+                    <div class="count-item d-flex flex-column align-items-center">
+                      <div class="icon mb-2">
+                        <i class="fas fa-check-circle"></i>
+                      </div>
+                      <h4 class="count">{{ totalVisitas }}</h4>
+                      <p class="subtitle">Visitas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-card>
+      </div>
+      
+      
+    </div>
   </div>
   
