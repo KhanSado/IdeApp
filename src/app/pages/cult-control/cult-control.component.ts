@@ -8,7 +8,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'; // Importa Firestore corretamente no modo compat
 import { Cult } from 'src/app/models/Cult';
 
-
 @Component({
   selector: 'app-cult-control',
   standalone: true,
@@ -35,16 +34,15 @@ export class CultControlComponent implements OnInit{
 
   async findCults(limit: number = 5) {
     try {
-      // Chama o serviço para buscar os cultos com paginação
       const { documents, lastVisible } = await this.service.findData(this.lastVisible, limit);
 
       if (documents && documents.length > 0) {
-        this.cults = [...this.cults, ...documents]; // Adiciona os novos cultos à lista existente
-        this.lastVisible = lastVisible; // Atualiza o último documento visível para paginação
-        this.hasMoreCults = true; // Existem mais cultos
+        this.cults = [...this.cults, ...documents]; 
+        this.lastVisible = lastVisible;
+        this.hasMoreCults = true;
       } else {
         console.log('Nenhum documento encontrado');
-        this.hasMoreCults = false; // Não há mais cultos para carregar
+        this.hasMoreCults = false; 
       }
     } catch (error) {
       console.error('Erro ao buscar documentos:', error);
