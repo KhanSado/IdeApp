@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CultControlService } from './service/cult-control.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore'; // Importa Firestore corretamente no modo compat
+import 'firebase/compat/firestore'; // Importa Firestore no modo compat
 import { Cult } from 'src/app/models/Cult';
 
 @Component({
@@ -13,67 +13,115 @@ import { Cult } from 'src/app/models/Cult';
   standalone: true,
   imports: [CommonModule, SharedModule, RouterModule, DatePipe],
   templateUrl: './cult-control.component.html',
-  styleUrl: './cult-control.component.scss'
+  styleUrls: ['./cult-control.component.scss'], // Corrigido o nome do estilo
 })
-export class CultControlComponent implements OnInit{
+export class CultControlComponent implements OnInit {
+  cults: Cult[] = []; // Cultos carregados para a página atual
+  totalDocuments = 0; // Total de documentos na coleção
+  totalPages = 0; // Total de páginas
+  currentPage = 1; // Página atual
+  limit = 5; // Itens por página
+  lastVisible: firebase.firestore.DocumentSnapshot | null = null; // Último documento visível
+  previousPages: firebase.firestore.DocumentSnapshot[] = []; // Rastreamento de páginas anteriores
+  hasMoreCults = true; // Controle do botão "Próxima Página"
 
-  lastVisible: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> | null = null;
+  newCultForm!: FormGroup; // Para uso futuro, caso precise de um formulário
+  cult: Cult | undefined; // Detalhes do culto selecionado (opcional)
 
-  hasMoreCults: boolean = true; 
+  constructor(private service: CultControlService, private router: Router) {}
 
-
-  newCultForm!: FormGroup
-  cults: Cult[] = [];
-  cult: Cult | undefined;
-
-  constructor(private service: CultControlService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.findCults()
+  async ngOnInit(): Promise<void> { 
+    await this.calculateTotalPages(); // Calcula o total de páginas
+    this.lastVisible = null; // Garante que a primeira página será carregada
+    this.previousPages = []; // Reinicia as páginas anteriores
+    await this.loadData('previous'); // Carrega os cultos da primeira página
   }
 
-  async findCults(limit: number = 5) {
+  // Calcula o total de páginas baseado no número total de documentos
+  async calculateTotalPages(): Promise<void> {
     try {
-      const { documents, lastVisible } = await this.service.findData(this.lastVisible, limit);
+      this.totalDocuments = await this.service.getTotalDocumentsCount();
+      this.totalPages = Math.ceil(this.totalDocuments / this.limit);
+    } catch (error) {
+      console.error('Erro ao calcular total de páginas:', error);
+    }
+  }
 
-      if (documents && documents.length > 0) {
-        this.cults = [...this.cults, ...documents]; 
-        this.lastVisible = lastVisible;
-        this.hasMoreCults = true;
+  // Carrega os cultos da página atual, com navegação
+  async loadData(direction: 'next' | 'previous' = 'next'): Promise<void> {
+    try {
+      const { paginatedCult, updatedPreviousPages } = await this.service.findDataWithPagination(
+        this.limit,
+        this.lastVisible,
+        direction,
+        this.previousPages
+      );
+  
+      this.cults = paginatedCult.documents;
+      this.lastVisible = paginatedCult.lastVisible;
+      this.previousPages = updatedPreviousPages;
+  
+      // Atualiza o número da página atual
+      if (direction === 'next' && this.currentPage < this.totalPages) {
+        this.currentPage++;
+      } else if (direction === 'previous' && this.currentPage > 1) {
+        this.currentPage--;
+      }
+  
+      // Define se há mais cultos a carregar
+      this.hasMoreCults = this.currentPage < this.totalPages;
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    }
+  }
+  
+
+  // Navega para uma página específica
+  async goToPage(page: number): Promise<void> {
+    if (page >= 1 && page <= this.totalPages) {
+      // Resetar lastVisible e páginas anteriores se navegar diretamente
+      this.currentPage = page;
+      
+      // Atualizar o lastVisible e previousPages com base na página desejada
+      const pageIndex = page - 1;
+      if (pageIndex < this.previousPages.length) {
+        this.lastVisible = this.previousPages[pageIndex];
+        this.previousPages = this.previousPages.slice(0, pageIndex); // Manter as páginas anteriores até a página selecionada
       } else {
-        console.log('Nenhum documento encontrado');
-        this.hasMoreCults = false; 
+        this.lastVisible = null;
+        this.previousPages = [];
       }
-    } catch (error) {
-      console.error('Erro ao buscar documentos:', error);
+  
+      // Carregar os cultos da nova página
+      await this.loadData();
     }
   }
+  
 
-  async loadMoreCults(limit: number) {
-    try {
-      if (this.lastVisible) {
-        await this.findCults(limit);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar mais cultos:', error);
-    }
+  // Método para deletar um culto
+  deleteCult(docId: string): void {
+    this.service
+      .deleteCult(docId)
+      .then(() => {
+        console.log('Culto excluído com sucesso!');
+        this.loadData(); // Atualiza a lista após exclusão
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir culto:', error);
+      });
   }
 
-  async showDetails(id: string) {
+  // Método para exibir detalhes de um culto
+  async showDetails(id: string): Promise<void> {
     try {
       this.router.navigate(['/cult-control/cult-details/', id]);
     } catch (error) {
-      console.error('Erro ao buscar documento:', error);
-    }    
+      console.error('Erro ao redirecionar para os detalhes:', error);
+    }
   }
 
-  deleteCult(docId: string) {
-    this.service.deleteCult(docId)
-      .then(() => {
-        console.log('Pos excluído com sucesso!');
-      })
-      .catch(error => {
-        console.error('Erro ao excluir documento: ', error);
-      });
+  // Método auxiliar para criar um array para exibição de páginas
+  getPaginationArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

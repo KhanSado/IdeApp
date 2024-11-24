@@ -245,6 +245,8 @@ export class CultControlService implements OnInit {
       throw error;
     }
   }
+
+  
   async findData(lastVisible: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> | null = null, limit: number=2): Promise<PaginatedCult> {
     try {
       let collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc').limit(limit));
@@ -283,6 +285,60 @@ export class CultControlService implements OnInit {
     }
   }
   
+
+  async getTotalDocumentsCount(): Promise<number> {
+    try {
+      const collectionRef = this.firestore.collection('cult');
+      const querySnapshot = await collectionRef.get().toPromise();
+      return querySnapshot?.size || 0; // Retorna o número total de documentos
+    } catch (error) {
+      console.error('Erro ao contar os documentos:', error);
+      throw error;
+    }
+  }
+  
+
+  async findDataWithPagination(
+    limit: number,
+    lastVisible: firebase.firestore.DocumentSnapshot | null,
+    direction: 'next' | 'previous',
+    previousPages: firebase.firestore.DocumentSnapshot[] = []
+  ): Promise<{ paginatedCult: PaginatedCult; updatedPreviousPages: firebase.firestore.DocumentSnapshot[] }> {
+    try {
+      let collectionRef = this.firestore.collection('cult', ref => ref.orderBy('data', 'desc').limit(limit));
+      const updatedPreviousPages = [...previousPages];
+  
+      if (direction === 'next' && lastVisible) {
+        updatedPreviousPages.push(lastVisible);
+        collectionRef = this.firestore.collection('cult', ref =>
+          ref.orderBy('data', 'desc').startAfter(lastVisible).limit(limit)
+        );
+      } else if (direction === 'previous' && updatedPreviousPages.length > 0) {
+        const previousPage = updatedPreviousPages.pop();
+        collectionRef = this.firestore.collection('cult', ref =>
+          ref.orderBy('data', 'desc').endBefore(previousPage).limitToLast(limit)
+        );
+      }
+  
+      const querySnapshot = await collectionRef.get().toPromise();
+      const documents: Cult[] = [];
+      querySnapshot?.forEach(doc => documents.push(doc.data() as Cult));
+  
+      const newLastVisible = querySnapshot?.docs[querySnapshot.docs.length - 1] as firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> || null;
+  
+      return { 
+        paginatedCult: { documents, lastVisible: newLastVisible }, 
+        updatedPreviousPages 
+      };
+    } catch (error) {
+      console.error('Erro ao buscar documentos com paginação:', error);
+      throw error;
+    }
+  }
+  
+
+
+
 
   async findReceptionTeam(): Promise<ReceptionTeam[]> {
     try {

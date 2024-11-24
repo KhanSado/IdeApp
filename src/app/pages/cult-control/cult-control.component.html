@@ -31,9 +31,30 @@
       </table>
     </div>
 
-    <div *ngIf="hasMoreCults">
-      <button class="btn btn-light-primary" (click)="loadMoreCults(5)"> Mais </button> 
+    <div class="pagination-controls text-center mt-3">
+      <nav>
+        <ul class="pagination justify-content-center">
+          <!-- Botão "Anterior" -->
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="loadData('previous')">Anterior</button>
+          </li>
+    
+          <!-- Páginas numeradas -->
+          <li
+            class="page-item"
+            *ngFor="let page of getPaginationArray()"
+            [class.active]="page === currentPage"
+          >
+            <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+          </li>
+    
+          <!-- Botão "Próxima" -->
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="loadData('next')">Próxima</button>
+          </li>
+        </ul>
+      </nav>
     </div>
-
+    
   </app-card>
 </div>
