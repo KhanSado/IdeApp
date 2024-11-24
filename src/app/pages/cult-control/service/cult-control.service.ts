@@ -417,6 +417,41 @@ export class CultControlService implements OnInit {
     }
   }
 
+  async findDataByDate(startDate: Date, endDate: Date, limit: number = 2): Promise<PaginatedCult> {
+    try {
+      let collectionRef = this.firestore.collection('cult', ref => 
+        ref.orderBy('data', 'desc')
+           .where('data', '>=', startDate)  // Filtro para cultos após a data inicial
+           .where('data', '<=', endDate)    // Filtro para cultos antes da data final
+           .limit(limit)
+      );
+  
+      const querySnapshot = await collectionRef.get().toPromise();
+  
+      if (!querySnapshot) {
+        console.error('Erro ao buscar documentos');
+        return { documents: [], lastVisible: null };
+      }
+  
+      if (querySnapshot.empty) {
+        console.log('Nenhum documento encontrado');
+        return { documents: [], lastVisible: null };
+      }
+  
+      const documents: Cult[] = [];
+      querySnapshot.forEach(doc => {
+        documents.push(doc.data() as Cult);
+      });
+  
+      const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1] as firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>;
+  
+      return { documents, lastVisible: lastDocument };
+    } catch (error) {
+      console.error('Erro ao buscar cultos por data:', error);
+      throw error;
+    }
+  }
+  
 
   async deleteCult(docId: string): Promise<void> {
     try {

@@ -24,7 +24,8 @@ export class CultControlComponent implements OnInit {
   lastVisible: firebase.firestore.DocumentSnapshot | null = null; // Último documento visível
   previousPages: firebase.firestore.DocumentSnapshot[] = []; // Rastreamento de páginas anteriores
   hasMoreCults = true; // Controle do botão "Próxima Página"
-
+  startDate: Date | null = null;
+  endDate: Date | null = null;
   newCultForm!: FormGroup; // Para uso futuro, caso precise de um formulário
   cult: Cult | undefined; // Detalhes do culto selecionado (opcional)
 
@@ -124,4 +125,36 @@ export class CultControlComponent implements OnInit {
   getPaginationArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+
+  async searchByDate(): Promise<void> {
+    if (this.startDate && this.endDate) {
+      await this.loadDataByDate(this.startDate, this.endDate);
+    } else {
+      alert('Por favor, selecione ambas as datas.');
+    }
+  }
+
+  async loadDataByDate(startDate: Date, endDate: Date): Promise<void> {
+    try {
+      // Obtenha os dados de paginacão
+      const { documents, lastVisible }: PaginatedCult = await this.service.findDataByDate(startDate, endDate);
+      
+      // Atribua os documentos e o último documento visível
+      this.cults = documents;
+      this.lastVisible = lastVisible;
+      
+      // Aqui você pode adicionar uma lógica para as páginas anteriores, se necessário.
+      // Caso precise de alguma funcionalidade de 'updatedPreviousPages', talvez seja necessário
+      // calcular ou definir de outro jeito.
+  
+      this.hasMoreCults = this.cults.length > 0;  // Verifica se há cultos encontrados
+    } catch (error) {
+      console.error('Erro ao buscar cultos por data:', error);
+    }
+  }
+}
+
+interface PaginatedCult {
+  documents: any[];  // O tipo exato dos documentos
+  lastVisible: any;  // O tipo exato de lastVisible
 }

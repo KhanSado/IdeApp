@@ -1,6 +1,19 @@
 <div class="col-xl-12">
   <app-card cardTitle="Cultos" [options]="false" blockClass="table-border-style">
-    <div class="table-responsive">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="startDate" class="form-label">Data Início</label>
+        <input type="date" [(ngModel)]="startDate" id="startDate" class="form-control" placeholder="Selecione a data de início">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="endDate" class="form-label">Data Fim</label>
+        <input type="date" [(ngModel)]="endDate" id="endDate" class="form-control" placeholder="Selecione a data de fim">
+      </div>
+    </div>
+    <button class="btn btn-primary col-md-12" (click)="searchByDate()">Buscar</button>
+
+
+    <div class="table-responsive" style="padding-top: 2rem;">
       <table class="table table-styling">
         <thead>
           <tr class="table-primary">
