@@ -1,0 +1,10 @@
+.pagination .page-item {
+    margin: 0 5px; /* Espaço entre os botões */
+  }
+
+  @media (max-width: 576px) {
+    .pagination .page-link {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem; /* Ajuste do tamanho da fonte para telas pequenas */
+    }
+  }
